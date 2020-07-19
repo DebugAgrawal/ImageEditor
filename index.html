@@ -15,7 +15,8 @@
     <h1>Green Screen Effect</h1>
     <div>
       <fieldset>
-        <legend>UPLOAD A FOREROUND IMAGE</legend>
+        <legend>UPLOAD FOREGROUND IMAGE</legend>
+        (having green background)
         <canvas id="fi"></canvas>
         <input
           type="file"
@@ -27,6 +28,7 @@
       </fieldset>
       <fieldset>
         <legend>UPLOAD A BACKGROUND IMAGE</legend>
+        (no restrictions)
         <canvas id="bi"></canvas>
         <input
           type="file"
@@ -49,9 +51,10 @@
           onclick="clr()"
           style="float: left;"
         />
+        <!--
         <div id="myprogress">
-          <div id="mybar">0%</div>
-        </div>
+        <div id="mybar">0%</div>
+        </div>-->
       </fieldset>
     </div>
     <p>
@@ -64,7 +67,7 @@
     </p>
     <p>
       Try our new feature :
-      <a href="main/multi.html" target="_blank">MultiColor</a>
+      <a href="main/multi.html" target="_blank">Overlay</a>
     </p>
     <script src="main/function.js"></script>
   </body>
