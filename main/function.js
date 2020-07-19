@@ -56,8 +56,7 @@ function comp() {
         var x = pix.getX();
         var y = pix.getY();
 
-        barwidth = ((pixelnum++) / totalpix) * 100;
-        progWidth.style.width = barwidth + '%';
+
 
         if ((pix.getGreen() > 240) || (pix.getGreen() > (pix.getBlue() + pix.getRed()))) {
             c = bimg.getPixel(x, y);
