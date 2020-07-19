@@ -160,8 +160,6 @@ function clr() {
     Clear(fi);
     Clear(bi);
     Clear(composite);
-    Clear(enc);
-    Clear(dec);
 }
 function clrs() {
     Clear(fi);
