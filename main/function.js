@@ -9,6 +9,11 @@ var pixelnum = 0;
 var totalpix = null;
 var barwidth = null;
 
+function upload() {
+    var f = document.getElementById("fgu");
+    fimg = new SimpleImage(f);
+    fimg.drawTo(fi);
+}
 function upload1() {
     var f = document.getElementById("fg");
     fimg = new SimpleImage(f);
@@ -160,7 +165,14 @@ function clr() {
     Clear(dec);
     Clear(gray);
     Clear(multimg);
-    //progWidth.style.width = 0 + '%';
+}
+function clrg() {
+    Clear(fi);
+    Clear(gray);
+}
+function clrm() {
+    Clear(fi);
+    Clear(multimg);
 }
 function Clear(canvas) {
     var context = canvas.getContext("2d");
