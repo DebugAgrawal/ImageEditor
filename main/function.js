@@ -162,8 +162,12 @@ function clr() {
     Clear(composite);
     Clear(enc);
     Clear(dec);
-    Clear(gray);
-    Clear(multimg);
+}
+function clrs() {
+    Clear(fi);
+    Clear(bi);
+    Clear(enc);
+    Clear(dec);
 }
 function clrg() {
     Clear(fi);
