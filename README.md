@@ -1,4 +1,4 @@
-# [ImageEditor](https://codepen.io/debugagrawal/full/JjGmgWN)
+# [ImageEditor](https://codepen.io/debugagrawal/full/JjGmgWN) 
 
 ### A small Web Application currently providing 4 features to edit your image.
 
@@ -35,3 +35,6 @@
 * ##### Color Overlay.
   `It creates a layer of RGB color over the image provided having a transparable opacity`
   
+---
+###### *Click the heading to visit the Project*
+---
