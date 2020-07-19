@@ -1,0 +1,175 @@
+canvas {
+  height: 25vw;
+  width: 45vw;
+  margin: 10px 10px;
+  border: 5px solid rgba(0, 0, 0, 30%);
+  background-color: rgba(0, 0, 0, 40%);
+  opacity: 1;
+}
+#myprogress {
+  height: 20px;
+  width: 100%;
+  background-color: lightgray;
+  border: 5px solid black;
+  border-radius: 10px;
+}
+
+#mybar {
+  height: 21px;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+  background-color: green;
+  border-radius: 5px;
+}
+div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(45deg, red, cyan);
+}
+
+div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 5px;
+  border: 5px solid teal;
+  border-radius: 10px;
+}
+input {
+  margin: 10px 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  color: black;
+  font-size: 1.5vw * 10px;
+  height: 5vh;
+  width: 20vw;
+}
+input:hover {
+  margin: 10px 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  font-size: 1.5vw * 10px;
+  height: 5vh;
+  width: 20vw;
+}
+p {
+  font-size: 1.5vw;
+  background: linear-gradient(-45deg, cyan, orange);
+  color: black;
+  height: 5vh;
+  width: 50vw;
+  text-align: center;
+  border: 3px solid #c3c3c3;
+  border-radius: 10px;
+  padding: 7px 0px;
+  margin: 5px 0px;
+}
+p :hover {
+  font-size: 1.5vw;
+  background: linear-gradient(-45deg, cyan, orange);
+  color: white;
+  height: 5vh;
+  width: 50vw;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 7px 0px;
+  margin: 5px 0px;
+}
+h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 3vw;
+  font-weight: 200;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  position: relative;
+  padding: 25px 0px;
+  text-shadow: 5px 5px 4px lime;
+  background-color: rgba(0, 0, 0, 50%);
+  border-radius: 10px;
+}
+a {
+  font-size: 1.5vw;
+  color: teal;
+  font-family: monospace;
+}
+@media (max-width: 720px) {
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+  body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(45deg, cyan, red);
+  }
+  input {
+    margin: 10px 10px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    color: black;
+    font-size: 1.5vw * 10px;
+    height: 5vh;
+    width: 20vw;
+  }
+  p {
+    font-size: 2.5vw;
+    background: linear-gradient(-45deg, cyan, orange);
+    color: black;
+    height: 3vh;
+    width: 50vw;
+    text-align: center;
+    border: 3px solid #c3c3c3;
+    border-radius: 10px;
+    padding: 7px 0px;
+    margin: 5px 0px;
+  }
+  p :hover {
+    font-size: 2.5vw;
+    background: linear-gradient(-45deg, cyan, orange);
+    color: white;
+    height: 3vh;
+    width: 50vw;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+  h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 4vw;
+    font-weight: 200;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    position: relative;
+    padding: 25px 0px;
+    text-shadow: 5px 5px 4px lime;
+    background-color: rgba(0, 0, 0, 50%);
+    border-radius: 10px;
+  }
+  a {
+    font-size: 2.5vw;
+    color: teal;
+    font-family: monospace;
+  }
+}

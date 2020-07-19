@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimplePixel.js"></script>
+    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+    <title>Chroma Key</title>
+  </head>
+  <body>
+    <h1>Green Screen Effect</h1>
+    <div>
+      <fieldset>
+        <legend>UPLOAD A FOREROUND IMAGE</legend>
+        <canvas id="fi"></canvas>
+        <input
+          type="file"
+          value="image/*"
+          multiple="false"
+          id="fg"
+          onchange="upload1()"
+        />
+      </fieldset>
+      <fieldset>
+        <legend>UPLOAD A BACKGROUND IMAGE</legend>
+        <canvas id="bi"></canvas>
+        <input
+          type="file"
+          value="image/*"
+          multiple="false"
+          id="bg"
+          onchange="upload2()"
+        />
+      </fieldset>
+    </div>
+
+    <div>
+      <fieldset>
+        <canvas id="composite"></canvas>
+        <input type="button" value="Combine" id="comp" onclick="comp()" />
+        <input
+          type="button"
+          value="Clear"
+          id="clr"
+          onclick="clr()"
+          style="float: left;"
+        />
+        <div id="myprogress">
+          <div id="mybar">0%</div>
+        </div>
+      </fieldset>
+    </div>
+    <p>
+      Try our new feature : <a href="steg.html" target="blank">STEGONOGRAPHY</a>
+    </p>
+    <p>
+      Try our new feature : <a href="gray.html" target="blank">GrayScale</a>
+    </p>
+    <p>
+      Try our new feature : <a href="multi.html" target="blank">MultiColor</a>
+    </p>
+    <script src="function.js"></script>
+  </body>
+</html>
