@@ -9,6 +9,7 @@ var progWidth = document.getElementById("mybar");
 var pixelnum = 0;
 var totalpix = null;
 var barwidth = null;
+var combImg;
 var avgColor;
 
 function upload() {
@@ -78,6 +79,66 @@ function comp() {
     cimg.drawTo(composite);
 
 }
+
+function clearBits(value)
+{
+    var x = Math.floor(value/16)*16;
+    return x;
+}
+
+function extractBits(value)
+{
+   return (value%16)*16;
+   
+    
+}
+
+
+function chop2hide(image)
+{
+    for(var px of image.values())
+    {
+        px.setRed(clearBits(px.getRed()));
+        px.setGreen(clearBits(px.getGreen()));    
+        px.setBlue(clearBits(px.getBlue()));
+    }
+    return image;
+}
+
+
+function shift(image)
+{
+    for(var px of image.values())
+    {
+        px.setRed(px.getRed()/16);
+        px.setGreen(px.getGreen()/16);
+        px.setBlue(px.getBlue()/16);
+    }
+    return image;
+    
+}
+
+
+function combine(start,hide)
+{
+    var answer = new SimpleImage(start.getWidth(),start.getHeight());
+    
+    for(var px of answer.values())
+    {
+        var x = px.getX();
+        var y = px.getY();
+        
+        var sp = start.getPixel(x,y);
+        var hp = hide.getPixel(x,y);
+        
+        px.setRed(sp.getRed() +  hp.getRed());
+        px.setGreen(sp.getGreen() +  hp.getGreen());
+        px.setBlue(sp.getBlue() +  hp.getBlue());
+        
+    }
+    return answer;
+}
+
 function encrypt() {
 
     if (fimg == null || !fimg.complete()) {
@@ -94,42 +155,32 @@ function encrypt() {
         alert("sizes are not the same");
         changeSize();
     }
-    var c;
-    var d;
-    cimg = fimg;
-   // cimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
-    for (var pix of fimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
-        var r1 = ((pix.getRed() / 16) * 16);
-        var g1 = ((pix.getGreen() / 16) * 16);
-        var b1 = ((pix.getBlue() / 16) * 16);
-        c = bimg.getPixel(x, y);
-        var r2 = (c.getRed() / 16);
-        var g2 = (c.getGreen() / 16);
-        var b2 = (c.getBlue() / 16);
-        d = cimg.getPixel(x, y);
-        d.setRed(r1 + r2);
-        d.setGreen(g1 + g2);
-        d.setBlue(b1 + b2);
-    }
-    cimg.drawTo(enc);
+
+  fimg = chop2hide(fimg);
+  bimg = shift(bimg);
+  combImg = combine(fimg,bimg);
+  
+    combImg.drawTo(enc);
 }
+
+function extract(image)
+{
+    for(var px of image.values())
+    {
+        px.setRed(extractBits(px.getRed())) ;
+       px.setGreen(extractBits(px.getGreen())) ;
+        px.setBlue(extractBits(px.getBlue())) ;
+    }
+    return image;
+}
+
+
 function decrypt() {
-    dimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
-    for (var pix of cimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
-        var r1 = ((pix.getRed() % 16) * 16);
-        var g1 = ((pix.getGreen() % 16) * 16);
-        var b1 = ((pix.getBlue() % 16) * 16);
-        d = dimg.getPixel(x, y);
-        d.setRed(r1);
-        d.setGreen(g1);
-        d.setBlue(b1);
-    }
-    cimg.drawTo(dec);
+    var extractedImg = extract(combImg);
+    var dec = document.getElementById("dec");
+    extractedImg.drawTo(dec);
 }
+
 function makegray() {
     gimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
     for (var pix of fimg.values()) {
