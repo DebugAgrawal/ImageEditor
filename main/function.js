@@ -306,26 +306,33 @@ function clr() {
     Clear(fi);
     Clear(bi);
     Clear(composite);
+    fimg=null;
+    bimg=null;
 }
 function clrs() {
     Clear(fi);
     Clear(bi);
     Clear(enc);
     Clear(dec);
+    fimg=null;
+    bimg=null;
 }
 function clrg() {
     Clear(fi);
     Clear(gray);
+    fimg=null;
 }
 
 function clrR() {
     Clear(ri);
     Clear(rainBow);
+    fimg=null;
 }
 
 function clrm() {
     Clear(fi);
     Clear(multimg);
+    fimg=null;
 }
 function Clear(canvas) {
     var context = canvas.getContext("2d");
