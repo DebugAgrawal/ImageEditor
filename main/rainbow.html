@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Effect</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>RainBow Effect</h1>
+
+    <div>
+        <fieldset>
+          <legend>UPLOAD AN IMAGE</legend>
+          <canvas id="ri"></canvas>
+          <input
+            type="file"
+            value="image/*"
+            multiple="false"
+            id="rg"
+            onchange="upload3()"
+          />
+        </fieldset>
+      </div>
+
+      <div>
+        <fieldset>
+          <canvas id="rainBow"></canvas>
+          <input
+            type="button"
+            value="Apply RainBow Effect"
+            id="comp"
+            onclick="makeRainBow()"
+          />
+          <input
+            type="button"
+            value="Clear"
+            id="clr"
+            onclick="clrR()"
+            style="float: left;"
+          />
+        </fieldset>
+      </div>
+
+
+      <p>
+        Try our new feature :
+        <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
+      </p>
+      <p>
+        Try our new feature :
+        <a href="index.html" target="_blank">Green Screen Effect</a>
+      </p>
+      <p>
+        Try our new feature : <a href="multi.html" target="_blank">MultiColor</a>
+      </p>
+
+      <script src="function.js"></script>
+      <script src="SimpleImage.js"></script>
+
+</body>
+</html>
