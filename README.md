@@ -1,5 +1,5 @@
-# [ImageEditor](https://codepen.io/debugagrawal/full/JjGmgWN) 
-### A small Web Application currently providing 4 features to edit your image.
+# [ImageEditor](https://debugagrawal.github.io/ImageEditor/) 
+### A small Web Application currently providing 5 features to edit your image.
 * ##### Chroma Key effect.
 * ##### Gray Scale effect.
 * ##### Image Steganography.
