@@ -118,14 +118,15 @@ function encrypt() {
 function decrypt() {
     dimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
     for (var pix of cimg.values()) {
-        
-        // var r1 = ((pix.getRed() % 16) * 16);
-        // var g1 = ((pix.getGreen() % 16) * 16);
-        // var b1 = ((pix.getBlue() % 16) * 16);
-        // d = dimg.getPixel(x, y);
-        pix.setRed((pix.getRed() % 16) * 16);
-        pix.setGreen((pix.getGreen() % 16) * 16);
-        pix.setBlue((pix.getBlue() % 16) * 16);
+        var x = pix.getX();
+        var y = pix.getY();
+        var r1 = ((pix.getRed() % 16) * 16);
+        var g1 = ((pix.getGreen() % 16) * 16);
+        var b1 = ((pix.getBlue() % 16) * 16);
+        d = dimg.getPixel(x, y);
+        d.setRed(r1);
+        d.setGreen(g1);
+        d.setBlue(b1);
     }
     cimg.drawTo(dec);
 }
