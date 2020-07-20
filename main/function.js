@@ -4,10 +4,12 @@ var cimg = null;
 var dimg = null;
 var gimg = null;
 var mimg = null;
+var rimg = null;
 var progWidth = document.getElementById("mybar");
 var pixelnum = 0;
 var totalpix = null;
 var barwidth = null;
+var avgColor;
 
 function upload() {
     var f = document.getElementById("fgu");
@@ -23,6 +25,12 @@ function upload2() {
     var b = document.getElementById("bg");
     bimg = new SimpleImage(b);
     bimg.drawTo(bi);
+}
+
+function upload3() {
+    var b = document.getElementById("rg");
+    rimg = new SimpleImage(b);
+    rimg.drawTo(ri);
 }
 
 function changeSize() {
@@ -88,7 +96,8 @@ function encrypt() {
     }
     var c;
     var d;
-    cimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
+    cimg = fimg;
+   // cimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
     for (var pix of fimg.values()) {
         var x = pix.getX();
         var y = pix.getY();
@@ -107,20 +116,18 @@ function encrypt() {
     cimg.drawTo(enc);
 }
 function decrypt() {
-    var d;
     dimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
     for (var pix of cimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
-        var r1 = ((pix.getRed() % 16) * 16);
-        var g1 = ((pix.getGreen() % 16) * 16);
-        var b1 = ((pix.getBlue() % 16) * 16);
-        d = dimg.getPixel(x, y);
-        d.setRed(r1);
-        d.setGreen(g1);
-        d.setBlue(b1);
+        
+        // var r1 = ((pix.getRed() % 16) * 16);
+        // var g1 = ((pix.getGreen() % 16) * 16);
+        // var b1 = ((pix.getBlue() % 16) * 16);
+        // d = dimg.getPixel(x, y);
+        pix.setRed((pix.getRed() % 16) * 16);
+        pix.setGreen((pix.getGreen() % 16) * 16);
+        pix.setBlue((pix.getBlue() % 16) * 16);
     }
-    dimg.drawTo(dec);
+    cimg.drawTo(dec);
 }
 function makegray() {
     gimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
@@ -156,6 +163,144 @@ function multi() {
     }
     mimg.drawTo(multimg);
 }
+
+function makeRainBow()
+{
+   // rimg = new SimpleImage(rimg.getWidth(), rimg.getHeight());
+  var rectHeight =  rimg.getHeight();
+  var rectSegment = parseInt(rectHeight) / 7;
+  var Y;
+  var X;
+  for (pixel of rimg.values()) {
+    X = pixel.getX();
+    Y = pixel.getY();
+//      rimg.setPixel(X, Y, pixel);
+    avgColor = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+    if (Y >= 6 * parseInt(rectSegment)) {
+      doRed();
+    } else if (Y >= (5 * parseInt(rectSegment))) {
+      doOrange();
+    } else if (Y >= (4 * parseInt(rectSegment))) {
+      doYellow();
+    } else if (Y >= (3 * parseInt(rectSegment))) {
+      doGreen();
+    } else if (Y >= (2 * parseInt(rectSegment))) {
+      doBlue();
+    } else if (Y >= parseInt(rectSegment)) {
+      doIndigo();
+    } else {
+      doViolet();
+    }
+  }
+  rimg.drawTo(rainBow);
+}
+
+function doViolet() {
+    if (avgColor < 128) {
+      red = Math.round(1.6 * avgColor);
+      green = 0;
+      blue = Math.round(1.6 * avgColor);
+    } else {
+      red = Math.round(0.4 * avgColor + 153 );
+      green = Math.round(2 * avgColor - 255);
+      blue = Math.round(0.4 * avgColor + 153 );
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  
+  function doIndigo() {
+    if (avgColor < 128) {
+      red = Math.round(.8 * avgColor);
+      green = 0;
+      blue = Math.round(2 * avgColor);
+    } else {
+      red = Math.round(1.2 * avgColor - 51);
+      green = Math.round(2*avgColor - 255);
+      blue = 255;
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  
+  function doBlue() {
+   if (avgColor < 128) {
+      red = 0;
+      green = 0;
+      blue = Math.round(2*avgColor);
+    } else {
+      red = Math.round(2*avgColor-255);
+      green =Math.round(2*avgColor-255);
+      blue = 255;
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  function doGreen() {
+    if (avgColor < 128) {
+      red = 0;
+      green = Math.round(2*avgColor);
+      blue = 0;
+    } else {
+      red = Math.round(2*avgColor-255);
+      green = 255;
+      blue = Math.round(2*avgColor-255);
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  
+  function doYellow() {
+    if (avgColor < 128) {
+      red = Math.round(2 * avgColor);
+      green = Math.round(2 * avgColor);
+      blue = 0;
+    } else {
+      red = 255;
+      green = 255;
+      blue = Math.round(2 * avgColor - 255);
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  
+  function doOrange() {
+     if (avgColor < 128) {
+      red = Math.round(2 * avgColor);
+      green = Math.round(.8 * avgColor);
+      blue = 0;
+    } else {
+      red = 255;
+      green = Math.round(1.2 * avgColor - 51);
+      blue =  Math.round(2 * avgColor - 255);
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+  
+  function doRed() {
+    if (avgColor < 128) {
+      red = Math.round(2*avgColor);
+      green = 0;
+      blue = 0;
+    } else {
+      red = 255;
+      green = Math.round(2*avgColor-255);
+      blue = Math.round(2*avgColor-255);
+    }
+    pixel.setRed(red);
+    pixel.setGreen(green);
+    pixel.setBlue(blue);
+  }
+
+
+
 function clr() {
     Clear(fi);
     Clear(bi);
@@ -171,6 +316,12 @@ function clrg() {
     Clear(fi);
     Clear(gray);
 }
+
+function clrR() {
+    Clear(ri);
+    Clear(rainBow);
+}
+
 function clrm() {
     Clear(fi);
     Clear(multimg);
