@@ -1,384 +1,384 @@
-var fimg = null;
-var bimg = null;
-var cimg = null;
-var dimg = null;
-var gimg = null;
-var mimg = null;
-var rimg = null;
-var progWidth = document.getElementById("mybar");
-var pixelnum = 0;
-var totalpix = null;
-var barwidth = null;
-var combImg;
-var avgColor;
+var FOREGROUND_IMG = null;
+var BACKGROUND_IMG = null;
+var COMPOSITE_IMG = null;
+var GRAY_IMG = null;
+var OVERLAY_IMG = null;
+var RAINBOW_IMG = null;
+var ENCRYPTED_IMG = null;
+var AVG_COLOR;
 
-function upload() {
-    var f = document.getElementById("fgu");
-    fimg = new SimpleImage(f);
-    fimg.drawTo(fi);
-}
 function upload1() {
-    var f = document.getElementById("fg");
-    fimg = new SimpleImage(f);
-    fimg.drawTo(fi);
+  var f = document.getElementById("FOREGROUND_INP_ID");
+  FOREGROUND_IMG = new SimpleImage(f);
+  FOREGROUND_IMG.drawTo(FIRST_CANVAS_ID);
 }
 function upload2() {
-    var b = document.getElementById("bg");
-    bimg = new SimpleImage(b);
-    bimg.drawTo(bi);
-}
-
-function upload3() {
-    var b = document.getElementById("rg");
-    rimg = new SimpleImage(b);
-    rimg.drawTo(ri);
+  var b = document.getElementById("BACKGROUND_INP_ID");
+  BACKGROUND_IMG = new SimpleImage(b);
+  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
 }
 
 function changeSize() {
-    alert("\t\tRestoring Sizes \nEverything under control");
-    bimg.setSize(fimg.getWidth(), fimg.getHeight());
-    var bgcontext = bi.getContext("2d");
-    bgcontext.clearRect(0, 0, fi.width, fi.height);
-    bimg.drawTo(bi);
+  alert("\t\tRestoring Sizes \nEverything under control");
+  BACKGROUND_IMG.setSize(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
+  var secondCanvasContext = SECOND_CANVAS_ID.getContext("2d");
+  secondCanvasContext.clearRect(0, 0, FIRST_CANVAS_ID.width, FIRST_CANVAS_ID.height);
+  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
 }
 
-function comp() {
 
-    if (fimg == null || !fimg.complete()) {
-        alert("Please upload a Foreground image");
-    }
-    if (bimg == null || !bimg.complete()) {
-        alert("Please upload a Background image");
-    }
-    var wbg = bimg.getWidth();
-    var wfg = fimg.getWidth();
-    var hbg = bimg.getHeight();
-    var hfg = fimg.getHeight();
-    if (wbg != wfg || hbg != hfg) {
-        alert("sizes are not the same");
-        changeSize();
-    }
+function isForeGroundImageUploaded() {
+  if (FOREGROUND_IMG == null || !FOREGROUND_IMG.complete()) {
+    alert("Please upload a Foreground image");
+    return false;
+  }
+  return true;
+}
+
+function isBackGroundImageUploaded() {
+  if (BACKGROUND_IMG == null || !BACKGROUND_IMG.complete()) {
+    alert("Please upload a Background image");
+    return false;
+  }
+  return true;
+}
+
+
+
+function checkImageSize() {
+  var wbg = BACKGROUND_IMG.getWidth();
+  var wfg = FOREGROUND_IMG.getWidth();
+  var hbg = BACKGROUND_IMG.getHeight();
+  var hfg = FOREGROUND_IMG.getHeight();
+
+  if (wbg != wfg || hbg != hfg) {
+    alert("sizes are not the same");
+    changeSize();
+  }
+}
+
+
+
+function mergeGreenScreen() {
+
+  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
+    checkImageSize();
     var c;
-    cimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
-    totalpix = (fimg.getHeight() * fimg.getWidth() / 2);
-    for (var pix of fimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
+    COMPOSITE_IMG = new SimpleImage(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
+    for (var pix of FOREGROUND_IMG.values()) {
+      var x = pix.getX();
+      var y = pix.getY();
 
-
-
-        if ((pix.getGreen() > 240) || (pix.getGreen() > (pix.getBlue() + pix.getRed()))) {
-            c = bimg.getPixel(x, y);
-            cimg.setPixel(x, y, c);
-        }
-        else {
-            cimg.setPixel(x, y, pix);
-        }
+      if ((pix.getGreen() > 240) || (pix.getGreen() > (pix.getBlue() + pix.getRed()))) {
+        c = BACKGROUND_IMG.getPixel(x, y);
+        COMPOSITE_IMG.setPixel(x, y, c);
+      }
+      else {
+        COMPOSITE_IMG.setPixel(x, y, pix);
+      }
 
     }
-    cimg.drawTo(composite);
+    COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
+  }
+}
+
+function clearBits(value) {
+  return Math.floor(value / 16) * 16;
+}
+
+function chopImage1(image) {
+  for (var px of image.values()) {
+    px.setRed(clearBits(px.getRed()));
+    px.setGreen(clearBits(px.getGreen()));
+    px.setBlue(clearBits(px.getBlue()));
+  }
+  return image;
+}
+
+function chopImage2(image) {
+  for (var px of image.values()) {
+    px.setRed(px.getRed() / 16);
+    px.setGreen(px.getGreen() / 16);
+    px.setBlue(px.getBlue() / 16);
+  }
+  return image;
 
 }
 
-function clearBits(value)
-{
-    var x = Math.floor(value/16)*16;
-    return x;
-}
 
-function extractBits(value)
-{
-   return (value%16)*16;
-   
-    
-}
+function combineImages(start, hide) {
+  var answer = new SimpleImage(start.getWidth(), start.getHeight());
 
+  for (var px of answer.values()) {
+    var x = px.getX();
+    var y = px.getY();
 
-function chop2hide(image)
-{
-    for(var px of image.values())
-    {
-        px.setRed(clearBits(px.getRed()));
-        px.setGreen(clearBits(px.getGreen()));    
-        px.setBlue(clearBits(px.getBlue()));
-    }
-    return image;
-}
+    var sp = start.getPixel(x, y);
+    var hp = hide.getPixel(x, y);
 
+    px.setRed(sp.getRed() + hp.getRed());
+    px.setGreen(sp.getGreen() + hp.getGreen());
+    px.setBlue(sp.getBlue() + hp.getBlue());
 
-function shift(image)
-{
-    for(var px of image.values())
-    {
-        px.setRed(px.getRed()/16);
-        px.setGreen(px.getGreen()/16);
-        px.setBlue(px.getBlue()/16);
-    }
-    return image;
-    
-}
-
-
-function combine(start,hide)
-{
-    var answer = new SimpleImage(start.getWidth(),start.getHeight());
-    
-    for(var px of answer.values())
-    {
-        var x = px.getX();
-        var y = px.getY();
-        
-        var sp = start.getPixel(x,y);
-        var hp = hide.getPixel(x,y);
-        
-        px.setRed(sp.getRed() +  hp.getRed());
-        px.setGreen(sp.getGreen() +  hp.getGreen());
-        px.setBlue(sp.getBlue() +  hp.getBlue());
-        
-    }
-    return answer;
+  }
+  return answer;
 }
 
 function encrypt() {
 
-    if (fimg == null || !fimg.complete()) {
-        alert("Please upload a Foreground image");
-    }
-    if (bimg == null || !bimg.complete()) {
-        alert("Please upload a Background image");
-    }
-    var wbg = bimg.getWidth();
-    var wfg = fimg.getWidth();
-    var hbg = bimg.getHeight();
-    var hfg = fimg.getHeight();
-    if (wbg != wfg || hbg != hfg) {
-        alert("sizes are not the same");
-        changeSize();
-    }
+  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
+    checkImageSize();
 
-  fimg = chop2hide(fimg);
-  bimg = shift(bimg);
-  combImg = combine(fimg,bimg);
-  
-    combImg.drawTo(enc);
+    FOREGROUND_IMG = chopImage1(FOREGROUND_IMG);
+    BACKGROUND_IMG = chopImage2(BACKGROUND_IMG);
+    ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
+
+    ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
+  }
 }
 
-function extract(image)
-{
-    for(var px of image.values())
-    {
-        px.setRed(extractBits(px.getRed())) ;
-       px.setGreen(extractBits(px.getGreen())) ;
-        px.setBlue(extractBits(px.getBlue())) ;
-    }
-    return image;
+
+function extractBits(value) {
+  return (value % 16) * 16;
 }
 
+function extractHiddenImage(image) {
+  for (var px of image.values()) {
+    px.setRed(extractBits(px.getRed()));
+    px.setGreen(extractBits(px.getGreen()));
+    px.setBlue(extractBits(px.getBlue()));
+  }
+  return image;
+}
 
 function decrypt() {
-    var extractedImg = extract(combImg);
-    var dec = document.getElementById("dec");
-    extractedImg.drawTo(dec);
+  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
+    if (ENCRYPTED_IMG != null) {
+      var extractedImg = extractHiddenImage(ENCRYPTED_IMG);
+      extractedImg.drawTo(DECRYPT_CANVAS_ID);
+    }
+    else {
+      alert("Please Crypt the Image before Decrypting");
+    }
+
+  }
 }
 
 function makegray() {
-    gimg = new SimpleImage(fimg.getWidth(), fimg.getHeight());
-    for (var pix of fimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
-        var g = gimg.getPixel(x, y);
-        var grayc = ((pix.getGreen() + pix.getRed() + pix.getBlue()) / 3);
-        g.setGreen(grayc);
-        g.setRed(grayc);
-        g.setBlue(grayc);
+  if (isForeGroundImageUploaded()) {
+    GRAY_IMG = new SimpleImage(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
+    for (var pix of FOREGROUND_IMG.values()) {
+      var x = pix.getX();
+      var y = pix.getY();
+      var g = GRAY_IMG.getPixel(x, y);
+      var grayc = ((pix.getGreen() + pix.getRed() + pix.getBlue()) / 3);
+      g.setGreen(grayc);
+      g.setRed(grayc);
+      g.setBlue(grayc);
     }
-    gimg.drawTo(gray);
+    GRAY_IMG.drawTo(GRAY_CANVAS_ID);
+  }
 }
-function multi() {
-     mimg = fimg;
-    for (var pix of fimg.values()) {
-        var x = pix.getX();
-        var y = pix.getY();
-        var m = mimg.getPixel(x, y);
-        if (pix.getX() <= fimg.getWidth() / 3) {
-            m.setRed(255);
-            m.setAlpha(100);
-        }
-        if ((pix.getX() > fimg.getWidth() / 3) && pix.getX() <= (fimg.getWidth() / 3) * 2) {
-            m.setBlue(255);
-            m.setAlpha(100);
-        }
-        if ((pix.getX() > ((fimg.getWidth() / 3) * 2)) && (pix.getX() <= fimg.getWidth())) {
-            m.setGreen(255);
-            m.setAlpha(100);
-        }
+function doOverlay() {
+  if (isForeGroundImageUploaded()) {
+    OVERLAY_IMG = FOREGROUND_IMG;
+    for (var pix of FOREGROUND_IMG.values()) {
+      var x = pix.getX();
+      var y = pix.getY();
+      var m = OVERLAY_IMG.getPixel(x, y);
+      if (pix.getX() <= FOREGROUND_IMG.getWidth() / 3) {
+        m.setRed(255);
+        m.setAlpha(100);
+      }
+      if ((pix.getX() > FOREGROUND_IMG.getWidth() / 3) && pix.getX() <= (FOREGROUND_IMG.getWidth() / 3) * 2) {
+        m.setBlue(255);
+        m.setAlpha(100);
+      }
+      if ((pix.getX() > ((FOREGROUND_IMG.getWidth() / 3) * 2)) && (pix.getX() <= FOREGROUND_IMG.getWidth())) {
+        m.setGreen(255);
+        m.setAlpha(100);
+      }
     }
-    mimg.drawTo(multimg);
+    OVERLAY_IMG.drawTo(OVERLAY_CANVAS_ID);
+  }
 }
 
-function makeRainBow()
-{
-   // rimg = new SimpleImage(rimg.getWidth(), rimg.getHeight());
-  var rectHeight =  rimg.getHeight();
-  var rectSegment = parseInt(rectHeight) / 7;
-  var Y;
-  var X;
-  for (pixel of rimg.values()) {
-    X = pixel.getX();
-    Y = pixel.getY();
-//      rimg.setPixel(X, Y, pixel);
-    avgColor = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
-    if (Y >= 6 * parseInt(rectSegment)) {
-      doRed();
-    } else if (Y >= (5 * parseInt(rectSegment))) {
-      doOrange();
-    } else if (Y >= (4 * parseInt(rectSegment))) {
-      doYellow();
-    } else if (Y >= (3 * parseInt(rectSegment))) {
-      doGreen();
-    } else if (Y >= (2 * parseInt(rectSegment))) {
-      doBlue();
-    } else if (Y >= parseInt(rectSegment)) {
-      doIndigo();
-    } else {
-      doViolet();
+function makeRainBow() {
+  if (isForeGroundImageUploaded()) {
+    RAINBOW_IMG = FOREGROUND_IMG;
+    var rectHeight = RAINBOW_IMG.getHeight();
+    var rectSegment = parseInt(rectHeight) / 7;
+    var Y;
+    var X;
+    for (pixel of RAINBOW_IMG.values()) {
+      X = pixel.getX();
+      Y = pixel.getY();
+      AVG_COLOR = (pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3;
+      if (Y >= 6 * parseInt(rectSegment)) {
+        doRed();
+      } else if (Y >= (5 * parseInt(rectSegment))) {
+        doOrange();
+      } else if (Y >= (4 * parseInt(rectSegment))) {
+        doYellow();
+      } else if (Y >= (3 * parseInt(rectSegment))) {
+        doGreen();
+      } else if (Y >= (2 * parseInt(rectSegment))) {
+        doBlue();
+      } else if (Y >= parseInt(rectSegment)) {
+        doIndigo();
+      } else {
+        doViolet();
+      }
     }
+    RAINBOW_IMG.drawTo(RAINBOW_CANVAS_ID);
   }
-  rimg.drawTo(rainBow);
 }
 
 function doViolet() {
-    if (avgColor < 128) {
-      red = Math.round(1.6 * avgColor);
-      green = 0;
-      blue = Math.round(1.6 * avgColor);
-    } else {
-      red = Math.round(0.4 * avgColor + 153 );
-      green = Math.round(2 * avgColor - 255);
-      blue = Math.round(0.4 * avgColor + 153 );
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
+  if (AVG_COLOR < 128) {
+    red = Math.round(1.6 * AVG_COLOR);
+    green = 0;
+    blue = Math.round(1.6 * AVG_COLOR);
+  } else {
+    red = Math.round(0.4 * AVG_COLOR + 153);
+    green = Math.round(2 * AVG_COLOR - 255);
+    blue = Math.round(0.4 * AVG_COLOR + 153);
   }
-  
-  function doIndigo() {
-    if (avgColor < 128) {
-      red = Math.round(.8 * avgColor);
-      green = 0;
-      blue = Math.round(2 * avgColor);
-    } else {
-      red = Math.round(1.2 * avgColor - 51);
-      green = Math.round(2*avgColor - 255);
-      blue = 255;
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-  
-  function doBlue() {
-   if (avgColor < 128) {
-      red = 0;
-      green = 0;
-      blue = Math.round(2*avgColor);
-    } else {
-      red = Math.round(2*avgColor-255);
-      green =Math.round(2*avgColor-255);
-      blue = 255;
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-  function doGreen() {
-    if (avgColor < 128) {
-      red = 0;
-      green = Math.round(2*avgColor);
-      blue = 0;
-    } else {
-      red = Math.round(2*avgColor-255);
-      green = 255;
-      blue = Math.round(2*avgColor-255);
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-  
-  function doYellow() {
-    if (avgColor < 128) {
-      red = Math.round(2 * avgColor);
-      green = Math.round(2 * avgColor);
-      blue = 0;
-    } else {
-      red = 255;
-      green = 255;
-      blue = Math.round(2 * avgColor - 255);
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-  
-  function doOrange() {
-     if (avgColor < 128) {
-      red = Math.round(2 * avgColor);
-      green = Math.round(.8 * avgColor);
-      blue = 0;
-    } else {
-      red = 255;
-      green = Math.round(1.2 * avgColor - 51);
-      blue =  Math.round(2 * avgColor - 255);
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-  
-  function doRed() {
-    if (avgColor < 128) {
-      red = Math.round(2*avgColor);
-      green = 0;
-      blue = 0;
-    } else {
-      red = 255;
-      green = Math.round(2*avgColor-255);
-      blue = Math.round(2*avgColor-255);
-    }
-    pixel.setRed(red);
-    pixel.setGreen(green);
-    pixel.setBlue(blue);
-  }
-
-
-
-function clr() {
-    Clear(fi);
-    Clear(bi);
-    Clear(composite);
-}
-function clrs() {
-    Clear(fi);
-    Clear(bi);
-    Clear(enc);
-    Clear(dec);
-}
-function clrg() {
-    Clear(fi);
-    Clear(gray);
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
 }
 
-function clrR() {
-    Clear(ri);
-    Clear(rainBow);
+function doIndigo() {
+  if (AVG_COLOR < 128) {
+    red = Math.round(.8 * AVG_COLOR);
+    green = 0;
+    blue = Math.round(2 * AVG_COLOR);
+  } else {
+    red = Math.round(1.2 * AVG_COLOR - 51);
+    green = Math.round(2 * AVG_COLOR - 255);
+    blue = 255;
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
 }
 
-function clrm() {
-    Clear(fi);
-    Clear(multimg);
+function doBlue() {
+  if (AVG_COLOR < 128) {
+    red = 0;
+    green = 0;
+    blue = Math.round(2 * AVG_COLOR);
+  } else {
+    red = Math.round(2 * AVG_COLOR - 255);
+    green = Math.round(2 * AVG_COLOR - 255);
+    blue = 255;
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
 }
-function Clear(canvas) {
-    var context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
+function doGreen() {
+  if (AVG_COLOR < 128) {
+    red = 0;
+    green = Math.round(2 * AVG_COLOR);
+    blue = 0;
+  } else {
+    red = Math.round(2 * AVG_COLOR - 255);
+    green = 255;
+    blue = Math.round(2 * AVG_COLOR - 255);
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
+}
+
+function doYellow() {
+  if (AVG_COLOR < 128) {
+    red = Math.round(2 * AVG_COLOR);
+    green = Math.round(2 * AVG_COLOR);
+    blue = 0;
+  } else {
+    red = 255;
+    green = 255;
+    blue = Math.round(2 * AVG_COLOR - 255);
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
+}
+
+function doOrange() {
+  if (AVG_COLOR < 128) {
+    red = Math.round(2 * AVG_COLOR);
+    green = Math.round(.8 * AVG_COLOR);
+    blue = 0;
+  } else {
+    red = 255;
+    green = Math.round(1.2 * AVG_COLOR - 51);
+    blue = Math.round(2 * AVG_COLOR - 255);
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
+}
+
+function doRed() {
+  if (AVG_COLOR < 128) {
+    red = Math.round(2 * AVG_COLOR);
+    green = 0;
+    blue = 0;
+  } else {
+    red = 255;
+    green = Math.round(2 * AVG_COLOR - 255);
+    blue = Math.round(2 * AVG_COLOR - 255);
+  }
+  pixel.setRed(red);
+  pixel.setGreen(green);
+  pixel.setBlue(blue);
+}
+
+function clearGreenScreen() {
+  clearCanvas(FIRST_CANVAS_ID);
+  clearCanvas(SECOND_CANVAS_ID);
+  clearCanvas(COMPOSITE_CANVAS_ID);
+  FOREGROUND_IMG = null;
+  BACKGROUND_IMG = null;
+  COMPOSITE_IMG = null
+}
+
+
+function clearDecrypt() {
+  clearCanvas(SECOND_CANVAS_ID);
+  clearCanvas(DECRYPT_CANVAS_ID);
+  BACKGROUND_IMG = null;
+}
+function clearEncrypt() {
+  clearCanvas(FIRST_CANVAS_ID);
+  clearCanvas(ENCRYPT_CANVAS_ID);
+  FOREGROUND_IMG = null;
+}
+function clearGrayScale() {
+  clearCanvas(FIRST_CANVAS_ID);
+  clearCanvas(GRAY_CANVAS_ID);
+  FOREGROUND_IMG = null;
+  GRAY_IMG = null;
+}
+
+function clearRainbow() {
+  clearCanvas(RAINBOW_CANVAS_ID);
+  clearCanvas(FIRST_CANVAS_ID);
+  RAINBOW_IMG = null;
+  FOREGROUND_IMG = null;
+}
+
+function clearOverlay() {
+  clearCanvas(FIRST_CANVAS_ID);
+  clearCanvas(OVERLAY_CANVAS_ID);
+  FOREGROUND_IMG = null;
+  OVERLAY_IMG = null
+}
+function clearCanvas(canvas) {
+  var context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }

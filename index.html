@@ -1,70 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="main/style.css" />
-    <title>Chroma Key</title>
-  </head>
-  <body>
-    <h1>Green Screen Effect</h1>
-    <div>
-      <fieldset>
-        <legend>UPLOAD FOREGROUND IMAGE</legend>
-        (having green background)
-        <canvas id="fi"></canvas>
-        <input
-          type="file"
-          value="image/*"
-          multiple="false"
-          id="fg"
-          onchange="upload1()"
-        />
-      </fieldset>
-      <fieldset>
-        <legend>UPLOAD A BACKGROUND IMAGE</legend>
-        (no restrictions)
-        <canvas id="bi"></canvas>
-        <input
-          type="file"
-          value="image/*"
-          multiple="false"
-          id="bg"
-          onchange="upload2()"
-        />
-      </fieldset>
-    </div>
 
-    <div>
-      <fieldset>
-        <canvas id="composite"></canvas>
-        <input type="button" value="Combine" id="comp" onclick="comp()" />
-        <input
-          type="button"
-          value="Clear"
-          id="clr"
-          onclick="clr()"
-          style="float: left;"
-        />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="main/style.css" />
+  <title>Chroma Key</title>
+</head>
 
-      </fieldset>
-    </div>
-    <p>
-      Try our new feature :
-      <a href="main/steg.html" target="_blank">STEGONOGRAPHY</a>
-    </p>
-    <p>
-      Try our new feature :
-      <a href="main/gray.html" target="_blank">GrayScale</a>
-    </p>
-    <p>
-      Try our new feature :
-      <a href="main/multi.html" target="_blank">Overlay</a>
-    </p>
-    <script src="main/function.js"></script>
-    <script src="main/SimpleImage.js"></script>
-  </body>
+<body>
+  <h1>Green Screen Effect</h1>
+  <div>
+    <fieldset>
+      <legend>UPLOAD FOREGROUND IMAGE</legend>
+      (having green background)
+      <canvas id="FIRST_CANVAS_ID"></canvas>
+      <input type="file" value="image/*" multiple="false" id="FOREGROUND_INP_ID" onchange="upload1()" />
+    </fieldset>
+    <fieldset>
+      <legend>UPLOAD A BACKGROUND IMAGE</legend>
+      (no restrictions)
+      <canvas id="SECOND_CANVAS_ID"></canvas>
+      <input type="file" value="image/*" multiple="false" id="BACKGROUND_INP_ID" onchange="upload2()" />
+    </fieldset>
+  </div>
+
+  <div>
+    <fieldset>
+      <canvas id="COMPOSITE_CANVAS_ID"></canvas>
+      <input type="button" value="Combine" id="COMPOSITE_INP_ID" onclick="mergeGreenScreen()" />
+      <input type="button" value="Clear" onclick="clearGreenScreen()" style="float: left;" />
+
+    </fieldset>
+  </div>
+  <p>
+    Try our new feature :
+    <a href="main/steg.html" target="_blank">STEGONOGRAPHY</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="main/gray.html" target="_blank">GrayScale</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="main/multi.html" target="_blank">Overlay</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="main/rainbow.html" target="_blank">Rainbow</a>
+  </p>
+  <script src="main/function.js"></script>
+  <script src="main/SimpleImage.js"></script>
+</body>
+
 </html>
