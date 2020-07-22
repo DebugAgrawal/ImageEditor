@@ -347,7 +347,6 @@ function clearGreenScreen() {
   COMPOSITE_IMG = null
 }
 
-
 function clearDecrypt() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
@@ -376,7 +375,7 @@ function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
   FOREGROUND_IMG = null;
-  OVERLAY_IMG = null
+  OVERLAY_IMG = null;
 }
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
