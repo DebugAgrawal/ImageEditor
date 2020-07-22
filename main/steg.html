@@ -1,80 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>Stegonagraphy</title>
-  </head>
-  <body>
-    <h1>Try Steganography</h1>
-    <div>
-      <fieldset>
-        <legend>UPLOAD A FOREROUND IMAGE</legend>
-        <canvas id="fi"></canvas>
-        <input
-          type="file"
-          value="image/*"
-          multiple="false"
-          id="fg"
-          onchange="upload1()"
-        />
-      </fieldset>
-      <fieldset>
-        <legend>UPLOAD THE IMAGE TO BE HIDDEN</legend>
-        <canvas id="bi"></canvas>
-        <input
-          type="file"
-          value="image/*"
-          multiple="false"
-          id="bg"
-          onchange="upload2()"
-        />
-      </fieldset>
-    </div>
 
-    <div>
-      <fieldset>
-        <canvas id="enc"></canvas>
-        <input type="button" value="Crypt" id="comp" onclick="encrypt()" />
-        <input
-          type="button"
-          value="Clear"
-          id="clr"
-          onclick="clrs()"
-          style="float: left;"
-        />
-      </fieldset>
-      <fieldset>
-        <canvas id="dec"></canvas>
-        <input type="button" value="DeCrypt" id="dect" onclick="decrypt()" />
-        <input
-          type="button"
-          value="Clear"
-          id="clr"
-          onclick="clr()"
-          style="float: left;"
-        />
-      </fieldset>
-    </div>
-    <p>
-      Try our new feature :
-      <a href="index.html" target="_blank">Green Screen Effect</a>
-    </p>
-    <p>
-      Try our new feature : <a href="gray.html" target="_blank">GrayScale</a>
-    </p>
-    <p>
-      Try our new feature : <a href="multi.html" target="_blank">Overlay</a>
-    </p>
-    <p>
-      Try our new feature :
-      <a href="rainbow.html" target="_blank">Rainbow effect</a>
-    </p>
-    <script src="function.js"></script>
-    <script src="SimpleImage.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Stegonagraphy</title>
+</head>
+
+<body>
+  <h1>Try Steganography</h1>
+  <div>
+    <fieldset>
+      <legend>UPLOAD A FOREROUND IMAGE</legend>
+      <canvas id="FIRST_CANVAS_ID"></canvas>
+      <input type="file" value="image/*" multiple="false" id="FOREGROUND_INP_ID" onchange="upload1()" />
+    </fieldset>
+    <fieldset>
+      <legend>UPLOAD THE IMAGE TO BE HIDDEN</legend>
+      <canvas id="SECOND_CANVAS_ID"></canvas>
+      <input type="file" value="image/*" multiple="false" id="BACKGROUND_INP_ID" onchange="upload2()" />
+    </fieldset>
+  </div>
+
+  <div>
+    <fieldset>
+      <canvas id="ENCRYPT_CANVAS_ID"></canvas>
+      <input type="button" value="Crypt" onclick="encrypt()" />
+      <input type="button" value="Clear" onclick="clearEncrypt()" style="float: left;" />
+    </fieldset>
+    <fieldset>
+      <canvas id="DECRYPT_CANVAS_ID"></canvas>̥
+      <input type="button" value="DeCrypt" onclick="decrypt()" />
+      <input type="button" value="Clear" onclick="clearDecrypt()" style="float: left;" />
+    </fieldset>
+  </div>
+  <p>
+    Try our new feature :
+    <a href="index.html" target="_blank">Green Screen Effect</a>
+  </p>
+  <p>
+    Try our new feature : <a href="gray.html" target="_blank">GrayScale</a>
+  </p>
+  <p>
+    Try our new feature : <a href="multi.html" target="_blank">MultiColor</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="rainbow.html" target="_blank">Rainbow</a>
+  </p>
+  <script src="function.js"></script>
+  <script src="SimpleImage.js"></script>
+</body>
+
 </html>
+   

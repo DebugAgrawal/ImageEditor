@@ -1,64 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>GrayScale</title>
-  </head>
-  <body>
-    <h1>Gray Scale Effect</h1>
-    <div>
-      <fieldset>
-        <legend>UPLOAD AN IMAGE</legend>
-        <canvas id="fi"></canvas>
-        <input
-          type="file"
-          value="image/*"
-          multiple="false"
-          id="fg"
-          onchange="upload1()"
-        />
-      </fieldset>
-    </div>
+  
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="style.css" />
+  <title>GrayScale</title>
+</head>
 
-    <div>
-      <fieldset>
-        <canvas id="gray"></canvas>
-        <input
-          type="button"
-          value="Make GrayScale"
-          id="comp"
-          onclick="makegray()"
-        />
-        <input
-          type="button"
-          value="Clear"
-          id="clr"
-          onclick="clrg()"
-          style="float: left;"
-        />
-      </fieldset>
-    </div>
-    <p>
-      Try our new feature :
-      <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
-    </p>
-    <p>
-      Try our new feature :
-      <a href="index.html" target="_blank">Green Screen Effect</a>
-    </p>
-    <p>
-      Try our new feature : <a href="multi.html" target="_blank">Overlay</a>
-    </p>
-    <p>
-      Try our new feature :
-      <a href="rainbow.html" target="_blank">Rainbow effect</a>
-    </p>
-    <script src="function.js"></script>
-    <script src="SimpleImage.js"></script>
-  </body>
+<body>
+  <h1>Gray Scale Effect</h1>
+  <div>
+    <fieldset>
+      <legend>UPLOAD AN IMAGE</legend>
+      <canvas id="FIRST_CANVAS_ID"></canvas>
+      <input type="file" value="image/*" multiple="false" id="FOREGROUND_INP_ID" onchange="upload1()" />
+    </fieldset>
+  </div>
+
+  <div>
+    <fieldset>
+      <canvas id="GRAY_CANVAS_ID"></canvas>
+      <input type="button" value="Make GrayScale" onclick="makegray()" />
+      <input type="button" value="Clear" onclick="clearGrayScale()" style="float: left;" />
+    </fieldset>
+  </div>
+  <p>
+    Try our new feature :
+    <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="index.html" target="_blank">Green Screen Effect</a>
+  </p>
+  <p>
+    Try our new feature : <a href="multi.html" target="_blank">MultiColor</a>
+  </p>
+  <p>
+    Try our new feature :
+    <a href="rainbow.html" target="_blank">Rainbow</a>̥
+  </p>
+  <script src="function.js"></script>
+  <script src="SimpleImage.js"></script>
+</body>
+
 </html>
+
