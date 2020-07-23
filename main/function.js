@@ -6,6 +6,8 @@ var OVERLAY_IMG = null;
 var RAINBOW_IMG = null;
 var ENCRYPTED_IMG = null;
 var AVG_COLOR;
+var AUDIO_INDEX= new Audio('main/smack.mp3');
+var AUDIO_OTHERS= new Audio('cash.mp3');
 
 function upload1() {
   var f = document.getElementById("FOREGROUND_INP_ID");
@@ -347,6 +349,7 @@ function clearGreenScreen() {
   COMPOSITE_IMG = null
 }
 
+
 function clearDecrypt() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
@@ -375,9 +378,18 @@ function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
   FOREGROUND_IMG = null;
-  OVERLAY_IMG = null;
+  OVERLAY_IMG = null
 }
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function soundIndex()
+{
+  AUDIO_INDEX.play();
+}
+function soundOthers()
+{
+  AUDIO_OTHERS.play();
 }
