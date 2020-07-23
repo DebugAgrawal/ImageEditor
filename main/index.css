@@ -100,7 +100,6 @@ p :hover{
   left: 0;
   height:1vw;
   width:100%;
-
   color:chartreuse;
   text-decoration: none;
 }
@@ -125,7 +124,6 @@ p :hover{
   height:1vw;
   width:5%;
   background-color: chartreuse;
-  
 }
 @keyframes anim{
   25%{
