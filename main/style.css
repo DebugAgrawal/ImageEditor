@@ -1,7 +1,7 @@
 canvas {
   height: 25vw;
   width: 45vw;
-  margin: 10px 10px;
+  margin: 20px 10px;
   border: 5px solid rgba(0, 0, 0, 30%);
   background-color: rgba(0, 0, 0, 40%);
   opacity: 1;
@@ -71,42 +71,19 @@ input:hover {
   height: 5vh;
   width: 20vw;
 }
-/* p {
-  font-size: 1.5vw;
-  background: linear-gradient(-45deg, cyan, orange);
-  color: black;
-  height: 5vh;
-  width: 100%;
-  text-align: center;
-  border: 3px solid #c3c3c3;
-  border-radius: 10px;
-  padding: 7px 0px;
-  margin: 5px 0px;
-} */
-/* p :hover {
-  font-size: 1.5vw;
-  background: linear-gradient(-45deg, cyan, orange);
-  color: white;
-  height: 5vh;
-  width: 100%;
-  text-align: center;
-  border: 3px solid black;
-  border-radius: 10px;
-  padding: 7px 0px;
-  margin: 5px 0px;
-} */
+
 h1 {
   width: 100%;
   text-align: center;
   font-size: 3vw;
   font-weight: 200;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-style: italic;
+  font-family: "Cinzel Decorative", cursive;
   position: relative;
   padding: 25px 0px;
-  text-shadow: 5px 5px 4px lime;
+  text-shadow: 5px 5px 4px white;
   background-color: rgba(0, 0, 0, 50%);
   border-radius: 10px;
+  margin-top: 5px;
 }
 p {
   font-size: 2vw;
@@ -128,6 +105,13 @@ p {
 a {
   font-size: 1.5vw;
   color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  font-size: 1.5vw;
+  color: black;
+  text-decoration: underline;
 }
 
 #tagline {
@@ -272,9 +256,16 @@ a {
   a {
     font-size: 3vw;
     color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    font-size: 3vw;
+    color: black;
+    text-decoration: underline;
   }
   h1 {
     width: 100%;
+    top: 0;
     text-align: center;
     font-size: 8vw;
     font-weight: 200;
@@ -324,5 +315,79 @@ a {
   #four {
     grid-column: 2;
     grid-row: 3;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  padding: 10px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#d_para li {
+  padding: 1rem;
+  font-size: 1rem;
+  font-size-adjust: inherit;
+  font-family: "Russo One", sans-serif;
+}
+
+#imgs {
+  opacity: 1;
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  image-rendering: crisp-edges;
+  image-rendering: optimizeQuality;
+  image-rendering: pixelated;
+  border: 1px solid black;
+  box-shadow: 5px 5px 3px 3px black;
+  border-radius: 1em;
+}
+
+#imgs:hover {
+  box-shadow: 6px 6px 5px 5px black;
+}
+
+li:hover {
+  text-transform: capitalize;
+}
+
+@media (min-width: 480px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+
+    padding: 10px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #d_para li {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-size-adjust: inherit;
+    font-family: "Russo One", sans-serif;
+  }
+
+  #imgs {
+    opacity: 1;
+    display: inline-block;
+    position: relative;
+    height: 20em;
+    width: 30rem;
+    image-rendering: crisp-edges;
+    image-rendering: optimizeQuality;
+    image-rendering: pixelated;
+    border: 1px solid black;
+    border-radius: 1em;
   }
 }

@@ -148,21 +148,15 @@ p :hover{
         background-color: black;
       }
     .header {
-        position: fixed;
+        position: absolute;
         font-family: "Lobster";
         font-size:9vw;
         font-style: italic;
         color: aqua;
         
-        margin-top: 11vw;
+        margin-top: 75vw;
       }
-      .header :hover {
-        position: fixed;
-        font-size: 9vw;
-        font-style: italic;
-        color: aqua;
-        margin-top: 3vh;
-      }
+
       
       div {
         display: flex;
@@ -171,8 +165,8 @@ p :hover{
         text-align: center;
         width: auto;
         justify-items: center;
-   
-        margin-top:15vh;
+        margin-bottom:30vw;
+        margin-top:180vw;
       }
       
       div :hover {
