@@ -16,10 +16,11 @@
   </head>
 
   <body>
-    <section class="header" style="text-shadow: 9px 7px 5px dimgray;">
+    <a href="#content" class="header" style="text-shadow: 9px 7px 5px dimgray;">
       Welcome To Image Editor
-    </section>
-    <div>
+    
+  </a>
+    <div id="content">
       <input
         type="button"
         value="Green Screen Effect"
@@ -46,9 +47,13 @@
         onclick="parent.open('main/rainbow.html');soundIndex()"
       />
     </div>
-    <footer ><p>----------------------------------------------------------------------------{ Get to know our Developers }---------------------------------------------------------------------------</p></footer>
+    <footer id="arrow">
+      <a href="#content">🡻</a>
+    </footer>
     <a href="https://github.com/DebugAgrawal" target="_blank"
     > <footer id="d"></footer></a>
+
+
     <a href="https://github.com/ShashankMisal" target="_blank"
     > <footer id="s"></footer></a>
     <script src="main/function.js"></script>
