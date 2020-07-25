@@ -1,45 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>ColorOverlay</title>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="stylesheet" href="style.css" />
-  <title>ColorOverlay</title>
-</head>
+  <body>
+    <h1>ColorOverlay Effect</h1>
+    <div class="container">
+      <div id="d_para">
+        <ul>
+          <li>RGB overlay will put Strips of RED,GREEN and BLUE on image.</li>
+          <li>RGB Overlay is applied on corresponding image.</li>
+          <li>We have made a hands on experience for you guys below.</li>
+          <li>Try it now!</li>
+        </ul>
+      </div>
 
-<body>
-  <h1>ColorOverlay Effect</h1>
-  <div>
-    <fieldset>
-      <legend>UPLOAD AN IMAGE</legend>
-      <canvas id="FIRST_CANVAS_ID"></canvas>
-      <input type="file" value="image/*" multiple="false" id="FOREGROUND_INP_ID" onchange="upload1()" />
-    </fieldset>
-  </div>
+      <div>
+        <img
+          id="imgs"
+          src="Images/overlay_img.png"
+          alt="Example of Overlay Image"
+        />
+      </div>
+    </div>
+    <div>
+      <fieldset>
+        <legend>UPLOAD AN IMAGE</legend>
+        <canvas id="FIRST_CANVAS_ID"></canvas>
+        <input
+          type="file"
+          value="image/*"
+          multiple="false"
+          id="FOREGROUND_INP_ID"
+          onchange="upload1()"
+        />
+      </fieldset>
+    </div>
 
-  <div>
-    <fieldset>
-      <canvas id="OVERLAY_CANVAS_ID"></canvas>
-      <input type="button" value="Create an Overlay" id="COMPOSITE_INP_ID" onclick="doOverlay();soundOthers()" />
-      <input type="button" value="Clear" onclick="clearOverlay()" style="float: left;" />
-    </fieldset>
-  </div>̥
-  <p>
-    Try our new feature : <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
-  </p>
-  <p>
-    Try our new feature : <a href="gray.html" target="_blank">GrayScale</a>
-  </p>
-  <p>
-    Try our new feature : <a href="index.html" target="_blank">Green Screen Effect</a>
-  </p>
-  <p>
-    Try our new feature :
-    <a href="rainbow.html" target="_blank">Rainbow</a>
-  </p>
-</body>
-<script src="function.js"></script>
-<script src="SimpleImage.js"></script>
-
+    <div>
+      <fieldset>
+        <canvas id="OVERLAY_CANVAS_ID"></canvas>
+        <input
+          type="button"
+          value="Create an Overlay"
+          id="COMPOSITE_INP_ID"
+          onclick="doOverlay();soundOthers()"
+        />
+        <input
+          type="button"
+          value="Clear"
+          onclick="clearOverlay()"
+          style="float: left;"
+        />
+      </fieldset>
+    </div>
+    ̥
+    <div id="tagline">
+      <p>
+        Try our Other Features
+      </p>
+    </div>
+    <div id="feature">
+      <p id="one">
+        <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
+      </p>
+      <p id="two">
+        <a href="gray.html" target="_blank">GrayScale</a>
+      </p>
+      <p id="three">
+        <a href="index.html" target="_blank">GreenScreen</a>
+      </p>
+      <p id="four">
+        <a href="rainbow.html" target="_blank">Rainbow</a>
+      </p>
+    </div>
+  </body>
+  <script src="function.js"></script>
+  <script src="SimpleImage.js"></script>
 </html>

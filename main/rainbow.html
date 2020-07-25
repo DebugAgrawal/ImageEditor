@@ -1,51 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rainbow Effect</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rainbow Effect</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <body>
+    <h1>RainBow Effect</h1>
+    <div class="container">
+      <div id=d_para>
+        <ul>
+          <li>The Rainbow Effect is range of 7 colours applied on image</li>
+          <li>Rainbow filter is applied on corresponding image.</li>
+          <li>We have made a hands on experience for you guys below.</li>
+          <li>Try it now!</li>
+        </ul>
+      </div>
+      
+        <div>
+        <img id="imgs" src="Images/rainbow_img.jpg" alt="Example of RainBow Image" >
+      </div>
+    </div>
+    <div>
+      <fieldset>
+        <legend>UPLOAD AN IMAGE</legend>
+        <canvas id="FIRST_CANVAS_ID"></canvas>
+        <input
+          type="file"
+          value="image/*"
+          multiple="false"
+          id="FOREGROUND_INP_ID"
+          onchange="upload1()"
+        />
+      </fieldset>
+    </div>
 
-<body>
-  <h1>RainBow Effect</h1>
+    <div>
+      <fieldset>
+        <canvas id="RAINBOW_CANVAS_ID"></canvas>
+        <input
+          type="button"
+          value="Apply RainBow Effect"
+          onclick="makeRainBow();soundOthers()"
+        />
+        <input
+          type="button"
+          value="Clear"
+          onclick="clearRainbow()"
+          style="float: left;"
+        />
+      </fieldset>
+    </div>
 
-  <div>
-    <fieldset>
-      <legend>UPLOAD AN IMAGE</legend>
-      <canvas id="FIRST_CANVAS_ID"></canvas>
-      <input type="file" value="image/*" multiple="false" id="FOREGROUND_INP_ID" onchange="upload1()" />
-    </fieldset>
-  </div>
+    <div id="tagline">
+      <p>
+        Try our Other Features
+      </p>
+    </div>
+    <div id="feature">
+      <p id="one">
+        <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
+      </p>
+      <p id="two">
+        <a href="gray.html" target="_blank">GrayScale</a>
+      </p>
+      <p id="three">
+        <a href="multi.html" target="_blank">Overlay</a>
+      </p>
+      <p id="four">
+        <a href="index.html" target="_blank">GreenScreen</a>
+      </p>
+    </div>
 
-  <div>
-    <fieldset>
-      <canvas id="RAINBOW_CANVAS_ID"></canvas>
-      <input type="button" value="Apply RainBow Effect" onclick="makeRainBow();soundOthers()" />
-      <input type="button" value="Clear" onclick="clearRainbow()" style="float: left;" />
-    </fieldset>
-  </div>
-
-
-  <p>
-    Try our new feature :
-    <a href="steg.html" target="_blank">STEGONOGRAPHY</a>
-  </p>̥
-  <p>
-    Try our new feature :
-    <a href="index.html" target="_blank">Green Screen Effect</a>
-  </p>
-  <p>
-    Try our new feature : <a href="multi.html" target="_blank">MultiColor</a>
-  </p>
-  <p>
-    Try our new feature : <a href="gray.html" target="_blank">GrayScale</a>
-  </p>
-
-  <script src="function.js"></script>
-  <script src="SimpleImage.js"></script>
-
-</body>
-
+    <script src="function.js"></script>
+    <script src="SimpleImage.js"></script>
+  </body>
 </html>
