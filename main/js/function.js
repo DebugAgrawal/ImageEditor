@@ -6,8 +6,8 @@ var OVERLAY_IMG = null;
 var RAINBOW_IMG = null;
 var ENCRYPTED_IMG = null;
 var AVG_COLOR;
-var AUDIO_INDEX= new Audio('main/smack.mp3');
-var AUDIO_OTHERS= new Audio('cash.mp3');
+var AUDIO_INDEX = new Audio('main/Audio/smack.mp3');
+var AUDIO_OTHERS = new Audio('../Audio/cash.mp3');
 
 function upload1() {
   var f = document.getElementById("FOREGROUND_INP_ID");
@@ -160,7 +160,7 @@ function decrypt() {
       extractedImg.drawTo(DECRYPT_CANVAS_ID);
     }
     else {
-      alert("Please Crypt the Image before Decrypting");
+      alert("Please EnCrypt the Image before Decrypting");
     }
 
   }
@@ -353,9 +353,13 @@ function clearGreenScreen() {
 function clearDecrypt() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
+  clearCanvas(FIRST_CANVAS_ID);
+  clearCanvas(ENCRYPT_CANVAS_ID);
   BACKGROUND_IMG = null;
 }
 function clearEncrypt() {
+  clearCanvas(SECOND_CANVAS_ID);
+  clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
   FOREGROUND_IMG = null;
@@ -385,11 +389,9 @@ function clearCanvas(canvas) {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function soundIndex()
-{
+function soundIndex() {
   AUDIO_INDEX.play();
 }
-function soundOthers()
-{
+function soundOthers() {
   AUDIO_OTHERS.play();
 }

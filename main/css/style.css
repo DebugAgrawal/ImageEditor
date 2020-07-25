@@ -389,6 +389,11 @@ a:hover {
     image-rendering: optimizeQuality;
     image-rendering: pixelated;
     border: 1px solid black;
+    box-shadow: 5px 5px 3px 3px black;
     border-radius: 1em;
+  }
+
+  #imgs:hover {
+    box-shadow: 6px 6px 5px 5px black;
   }
 }

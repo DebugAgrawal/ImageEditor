@@ -6,7 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" type="image/*" href="../Images/logo.png"/>
     <link
       href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap"
       rel="stylesheet"
@@ -15,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
       rel="stylesheet"
     />
-    <title>Stegonagraphy</title>
+    <title>Image Editor : Stegonagraphy</title>
   </head>
 
   <body>
@@ -38,7 +39,7 @@
       <div>
         <img
           id="imgs"
-          src="Images/steg_img.JPG"
+          src="../Images/steg_img.JPG"
           alt="Example of Steganography Image"
         />
       </div>
@@ -71,7 +72,7 @@
     <div>
       <fieldset>
         <canvas id="ENCRYPT_CANVAS_ID"></canvas>
-        <input type="button" value="Crypt" onclick="encrypt();soundOthers()" />
+        <input type="button" value="EnCrypt" onclick="encrypt();soundOthers()" />
         <input
           type="button"
           value="Clear"
@@ -80,7 +81,7 @@
         />
       </fieldset>
       <fieldset>
-        <canvas id="DECRYPT_CANVAS_ID"></canvas>̥
+        <canvas id="DECRYPT_CANVAS_ID"></canvas>
         <input
           type="button"
           value="DeCrypt"
@@ -101,19 +102,19 @@
     </div>
     <div id="feature">
       <p id="one">
-        <a href="index.html" target="_blank">GreenScreen</a>
+        <a href="../html/greenscreen.html" target="_blank">GreenScreen</a>
       </p>
       <p id="two">
-        <a href="gray.html" target="_blank">GrayScale</a>
+        <a href="../html/grayscale.html" target="_blank">GrayScale</a>
       </p>
       <p id="three">
-        <a href="multi.html" target="_blank">Overlay</a>
+        <a href="../html/overlay.html" target="_blank">Overlay</a>
       </p>
       <p id="four">
-        <a href="rainbow.html" target="_blank">Rainbow</a>
+        <a href="../html/rainbow.html" target="_blank">Rainbow</a>
       </p>
     </div>
-    <script src="function.js"></script>
-    <script src="SimpleImage.js"></script>
+    <script src="../js/function.js"></script>
+    <script src="../js/SimpleImage.js"></script>
   </body>
 </html>
