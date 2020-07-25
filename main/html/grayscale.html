@@ -6,26 +6,32 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" type="image/*" href="Images/logo.png"/>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" type="image/*" href="../Images/logo.png"/>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap"
       rel="stylesheet"
     />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
       rel="stylesheet"
     />
-    <title>ColorOverlay</title>
+    <title>GrayScale</title>
   </head>
 
   <body>
-    <h1>ColorOverlay Effect</h1>
+    <h1>Gray Scale Effect</h1>
+
+    <!-- description -->
     <div class="container">
       <div id="d_para">
         <ul>
-          <li>RGB overlay will put Strips of RED,GREEN and BLUE on image.</li>
-          <li>RGB Overlay is applied on corresponding image.</li>
+          <li>
+            Grayscale is a range of monochromatic shades from black to white.
+          </li>
+          <li>Corresponding image is GRAY-SCALE image.</li>
           <li>We have made a hands on experience for you guys below.</li>
           <li>Try it now!</li>
         </ul>
@@ -34,11 +40,12 @@
       <div>
         <img
           id="imgs"
-          src="Images/overlay_img.png"
-          alt="Example of Overlay Image"
+          src="../Images/sample_grayimg.jpg"
+          alt="Example of GrayScale Image"
         />
       </div>
     </div>
+
     <div>
       <fieldset>
         <legend>UPLOAD AN IMAGE</legend>
@@ -55,22 +62,20 @@
 
     <div>
       <fieldset>
-        <canvas id="OVERLAY_CANVAS_ID"></canvas>
+        <canvas id="GRAY_CANVAS_ID"></canvas>
         <input
           type="button"
-          value="Create an Overlay"
-          id="COMPOSITE_INP_ID"
-          onclick="doOverlay();soundOthers()"
+          value="Make GrayScale"
+          onclick=" makegray();soundOthers()"
         />
         <input
           type="button"
           value="Clear"
-          onclick="clearOverlay()"
+          onclick="clearGrayScale()"
           style="float: left;"
         />
       </fieldset>
     </div>
-    ̥
     <div id="tagline">
       <p>
         Try our Other Features
@@ -78,19 +83,19 @@
     </div>
     <div id="feature">
       <p id="one">
-        <a href="steg.html" target="_blank">Steganography</a>
+        <a href="../html/steganography.html" target="_blank">Steganography</a>
       </p>
       <p id="two">
-        <a href="gray.html" target="_blank">GrayScale</a>
+        <a href="../html/greenscreen.html" target="_blank">GreenScreen</a>
       </p>
       <p id="three">
-        <a href="index.html" target="_blank">GreenScreen</a>
+        <a href="../html/overlay.html" target="_blank">Overlay</a>
       </p>
       <p id="four">
-        <a href="rainbow.html" target="_blank">Rainbow</a>
+        <a href="../html/rainbow.html" target="_blank">Rainbow</a>
       </p>
     </div>
+    <script src="../js/function.js"></script>
+    <script src="../js/SimpleImage.js"></script>
   </body>
-  <script src="function.js"></script>
-  <script src="SimpleImage.js"></script>
 </html>
