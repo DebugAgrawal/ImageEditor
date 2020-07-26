@@ -81,6 +81,7 @@ function mergeGreenScreen() {
 
     }
     COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
+    AUDIO_OTHERS.play();
   }
 }
 
@@ -136,6 +137,7 @@ function encrypt() {
     ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
 
     ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 
@@ -179,6 +181,7 @@ function makegray() {
       g.setBlue(grayc);
     }
     GRAY_IMG.drawTo(GRAY_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 function doOverlay() {
@@ -202,6 +205,7 @@ function doOverlay() {
       }
     }
     OVERLAY_IMG.drawTo(OVERLAY_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 
@@ -233,6 +237,7 @@ function makeRainBow() {
       }
     }
     RAINBOW_IMG.drawTo(RAINBOW_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 
@@ -390,7 +395,4 @@ function clearCanvas(canvas) {
 
 function soundIndex() {
   AUDIO_INDEX.play();
-}
-function soundOthers() {
-  AUDIO_OTHERS.play();
 }
