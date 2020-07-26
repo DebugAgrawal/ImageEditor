@@ -9,6 +9,8 @@ var AVG_COLOR;
 var AUDIO_INDEX = new Audio('main/Audio/smack.mp3');
 var AUDIO_OTHERS = new Audio('../Audio/cash.mp3');
 
+
+// ----------------------UPLOAD & RESIZING SECTION----------------------------------
 function upload1() {
   var f = document.getElementById("FOREGROUND_INP_ID");
   FOREGROUND_IMG = new SimpleImage(f);
@@ -21,13 +23,12 @@ function upload2() {
 }
 
 function changeSize() {
-  alert("Restoring Sizes \nEverything is under control");
+  alert("Restoring Sizes \nEverything under control");
   BACKGROUND_IMG.setSize(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
   var secondCanvasContext = SECOND_CANVAS_ID.getContext("2d");
   secondCanvasContext.clearRect(0, 0, FIRST_CANVAS_ID.width, FIRST_CANVAS_ID.height);
   BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
 }
-
 
 function isForeGroundImageUploaded() {
   if (FOREGROUND_IMG == null || !FOREGROUND_IMG.complete()) {
@@ -45,8 +46,6 @@ function isBackGroundImageUploaded() {
   return true;
 }
 
-
-
 function checkImageSize() {
   var wbg = BACKGROUND_IMG.getWidth();
   var wfg = FOREGROUND_IMG.getWidth();
@@ -54,17 +53,18 @@ function checkImageSize() {
   var hfg = FOREGROUND_IMG.getHeight();
 
   if (wbg != wfg || hbg != hfg) {
-    alert("sizes are not the same");
+    alert("Sizes are not the same");
     changeSize();
   }
 }
 
-
 function alert1()
 {
-  alert("Make sure your image has greeen Background .");
+  alert("Make sure your image has greeen Background.");
 }
+// ...................................X.......................................................
 
+// ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
 function mergeGreenScreen() {
 
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
@@ -88,7 +88,9 @@ function mergeGreenScreen() {
     AUDIO_OTHERS.play();
   }
 }
+// ...................................X.......................................................
 
+// ---------------------------_STEGANOGRAPHY_CODE_-----------------------------------------
 function clearBits(value) {
   return Math.floor(value / 16) * 16;
 }
@@ -112,7 +114,6 @@ function chopImage2(image) {
 
 }
 
-
 function combineImages(image1, image2) {
   var ouput_image = new SimpleImage(image1.getWidth(), image1.getHeight());
 
@@ -135,14 +136,14 @@ function encrypt() {
 
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
     checkImageSize();
-
+    
     FOREGROUND_IMG = chopImage1(FOREGROUND_IMG);
     BACKGROUND_IMG = chopImage2(BACKGROUND_IMG);
     ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
 
     ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
-      AUDIO_OTHERS.play();
-      alert('!!! Congratulations, your  image has been successfully Encrypted!!!\n!!!Observe Carefully..!!!\nNow try decrypting your image')
+    AUDIO_OTHERS.play();
+    alert("!!! Congratulations, your  image has been successfully Encrypted!!!\n!!!Observe Carefully..!!!\nNow try decrypting your image");
   }
 }
 
@@ -173,7 +174,9 @@ function decrypt() {
 
   }
 }
+// ...................................X.......................................................
 
+//---------------------------_GRAYSCALE_CODE_-----------------------------------------
 function makegray() {
   if (isForeGroundImageUploaded()) {
     GRAY_IMG = new SimpleImage(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
@@ -187,9 +190,13 @@ function makegray() {
       g.setBlue(grayc);
     }
     GRAY_IMG.drawTo(GRAY_CANVAS_ID);
-      AUDIO_OTHERS.play();
+    AUDIO_OTHERS.play();
   }
 }
+//...................................X.......................................................
+
+
+//---------------------------_COLOR_OVERLAY_CODE_-----------------------------------------
 function doOverlay() {
   if (isForeGroundImageUploaded()) {
     OVERLAY_IMG = FOREGROUND_IMG;
@@ -211,10 +218,13 @@ function doOverlay() {
       }
     }
     OVERLAY_IMG.drawTo(OVERLAY_CANVAS_ID);
-      AUDIO_OTHERS.play();
+    AUDIO_OTHERS.play();
   }
 }
+//...................................X.......................................................
 
+
+//---------------------------_RAINBOW_EFFECT_CODE_-----------------------------------------
 function makeRainBow() {
   if (isForeGroundImageUploaded()) {
     RAINBOW_IMG = FOREGROUND_IMG;
@@ -243,7 +253,7 @@ function makeRainBow() {
       }
     }
     RAINBOW_IMG.drawTo(RAINBOW_CANVAS_ID);
-      AUDIO_OTHERS.play();
+    AUDIO_OTHERS.play();
   }
 }
 
@@ -351,16 +361,21 @@ function doRed() {
   pixel.setBlue(blue);
 }
 
+//...................................X.................................................
+
+
+//---------------------------_CLEAR_FUNCTIONS_-----------------------------------------
+
 function clearGreenScreen() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(COMPOSITE_CANVAS_ID);
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("BACKGROUND_INP_ID").value="" ;
   FOREGROUND_IMG = null;
   BACKGROUND_IMG = null;
-  document.getElementById("FOREGROUND_INP_ID").value = "";
-  document.getElementById("BACKGROUND_INP_ID").value = "";
+  COMPOSITE_IMG = null
 }
-
 
 function clearStegenography() {
   clearCanvas(SECOND_CANVAS_ID);
@@ -376,29 +391,37 @@ function clearStegenography() {
 function clearGrayScale() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(GRAY_CANVAS_ID);
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
   FOREGROUND_IMG = null;
-  document.getElementById("FOREGROUND_INP_ID").value = "";
+  GRAY_IMG = null;
 }
 
 function clearRainbow() {
   clearCanvas(RAINBOW_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  RAINBOW_IMG = null;
   FOREGROUND_IMG = null;
-  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
   FOREGROUND_IMG = null;
-  document.getElementById("FOREGROUND_INP_ID").value = "";
+  OVERLAY_IMG = null
 }
-
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
+//...................................X.......................................................
 
+
+//---------------------------AUDIO_CODE_-----------------------------------------
 function soundIndex() {
   AUDIO_INDEX.play();
 }
+//...................................X............................................
+
+
