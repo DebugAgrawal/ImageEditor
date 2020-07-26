@@ -21,7 +21,7 @@ function upload2() {
 }
 
 function changeSize() {
-  alert("\t\tRestoring Sizes \nEverything under control");
+  alert("Restoring Sizes \nEverything is under control");
   BACKGROUND_IMG.setSize(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
   var secondCanvasContext = SECOND_CANVAS_ID.getContext("2d");
   secondCanvasContext.clearRect(0, 0, FIRST_CANVAS_ID.width, FIRST_CANVAS_ID.height);
@@ -60,6 +60,10 @@ function checkImageSize() {
 }
 
 
+function alert1()
+{
+  alert("Make sure your image has greeen Background .");
+}
 
 function mergeGreenScreen() {
 
@@ -81,6 +85,7 @@ function mergeGreenScreen() {
 
     }
     COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
+    AUDIO_OTHERS.play();
   }
 }
 
@@ -108,22 +113,22 @@ function chopImage2(image) {
 }
 
 
-function combineImages(start, hide) {
-  var answer = new SimpleImage(start.getWidth(), start.getHeight());
+function combineImages(image1, image2) {
+  var ouput_image = new SimpleImage(image1.getWidth(), image1.getHeight());
 
-  for (var px of answer.values()) {
+  for (var px of ouput_image.values()) {
     var x = px.getX();
     var y = px.getY();
 
-    var sp = start.getPixel(x, y);
-    var hp = hide.getPixel(x, y);
+    var image1_pixel = image1.getPixel(x, y);
+    var image2_pixel = image2.getPixel(x, y);
 
-    px.setRed(sp.getRed() + hp.getRed());
-    px.setGreen(sp.getGreen() + hp.getGreen());
-    px.setBlue(sp.getBlue() + hp.getBlue());
+    px.setRed(image1_pixel.getRed() + image2_pixel.getRed());
+    px.setGreen(image1_pixel.getGreen() + image2_pixel.getGreen());
+    px.setBlue(image1_pixel.getBlue() + image2_pixel.getBlue());
 
   }
-  return answer;
+  return ouput_image;
 }
 
 function encrypt() {
@@ -136,6 +141,8 @@ function encrypt() {
     ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
 
     ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
+      AUDIO_OTHERS.play();
+      alert('!!! Congratulations, your  image has been successfully Encrypted!!!\n!!!Observe Carefully..!!!\nNow try decrypting your image')
   }
 }
 
@@ -158,6 +165,7 @@ function decrypt() {
     if (ENCRYPTED_IMG != null) {
       var extractedImg = extractHiddenImage(ENCRYPTED_IMG);
       extractedImg.drawTo(DECRYPT_CANVAS_ID);
+      AUDIO_OTHERS.play();
     }
     else {
       alert("Please EnCrypt the Image before Decrypting");
@@ -179,6 +187,7 @@ function makegray() {
       g.setBlue(grayc);
     }
     GRAY_IMG.drawTo(GRAY_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 function doOverlay() {
@@ -202,6 +211,7 @@ function doOverlay() {
       }
     }
     OVERLAY_IMG.drawTo(OVERLAY_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 
@@ -233,6 +243,7 @@ function makeRainBow() {
       }
     }
     RAINBOW_IMG.drawTo(RAINBOW_CANVAS_ID);
+      AUDIO_OTHERS.play();
   }
 }
 
@@ -346,44 +357,43 @@ function clearGreenScreen() {
   clearCanvas(COMPOSITE_CANVAS_ID);
   FOREGROUND_IMG = null;
   BACKGROUND_IMG = null;
-  COMPOSITE_IMG = null
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
 }
 
 
-function clearDecrypt() {
+function clearStegenography() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("BACKGROUND_INP_ID").value="" ;
+  FOREGROUND_IMG = null;
   BACKGROUND_IMG = null;
 }
-function clearEncrypt() {
-  clearCanvas(SECOND_CANVAS_ID);
-  clearCanvas(DECRYPT_CANVAS_ID);
-  clearCanvas(FIRST_CANVAS_ID);
-  clearCanvas(ENCRYPT_CANVAS_ID);
-  FOREGROUND_IMG = null;
-}
+
 function clearGrayScale() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(GRAY_CANVAS_ID);
   FOREGROUND_IMG = null;
-  GRAY_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearRainbow() {
   clearCanvas(RAINBOW_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
-  RAINBOW_IMG = null;
   FOREGROUND_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
   FOREGROUND_IMG = null;
-  OVERLAY_IMG = null
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
+
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -391,7 +401,4 @@ function clearCanvas(canvas) {
 
 function soundIndex() {
   AUDIO_INDEX.play();
-}
-function soundOthers() {
-  AUDIO_OTHERS.play();
 }
