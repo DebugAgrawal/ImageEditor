@@ -344,9 +344,8 @@ function clearGreenScreen() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(COMPOSITE_CANVAS_ID);
-  FOREGROUND_IMG = null;
-  BACKGROUND_IMG = null;
-  COMPOSITE_IMG = null
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
 }
 
 
@@ -355,35 +354,35 @@ function clearDecrypt() {
   clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
-  BACKGROUND_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
 }
 function clearEncrypt() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
-  FOREGROUND_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
 }
 function clearGrayScale() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(GRAY_CANVAS_ID);
-  FOREGROUND_IMG = null;
-  GRAY_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearRainbow() {
   clearCanvas(RAINBOW_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
-  RAINBOW_IMG = null;
-  FOREGROUND_IMG = null;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
-  FOREGROUND_IMG = null;
-  OVERLAY_IMG = null
+  document.getElementById("FOREGROUND_INP_ID").value = "";
 }
+
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
