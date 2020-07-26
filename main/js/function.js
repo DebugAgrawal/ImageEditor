@@ -160,6 +160,7 @@ function decrypt() {
     if (ENCRYPTED_IMG != null) {
       var extractedImg = extractHiddenImage(ENCRYPTED_IMG);
       extractedImg.drawTo(DECRYPT_CANVAS_ID);
+      AUDIO_OTHERS.play();
     }
     else {
       alert("Please EnCrypt the Image before Decrypting");
@@ -349,42 +350,42 @@ function clearGreenScreen() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(COMPOSITE_CANVAS_ID);
+  FOREGROUND_IMG = null;
+  BACKGROUND_IMG = null;
   document.getElementById("FOREGROUND_INP_ID").value = "";
   document.getElementById("BACKGROUND_INP_ID").value = "";
 }
 
 
-function clearDecrypt() {
+function clearStegenography() {
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value = "";
-  document.getElementById("BACKGROUND_INP_ID").value = "";
+  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("BACKGROUND_INP_ID").value="" ;
+  FOREGROUND_IMG = null;
+  BACKGROUND_IMG = null;
 }
-function clearEncrypt() {
-  clearCanvas(SECOND_CANVAS_ID);
-  clearCanvas(DECRYPT_CANVAS_ID);
-  clearCanvas(FIRST_CANVAS_ID);
-  clearCanvas(ENCRYPT_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value = "";
-  document.getElementById("BACKGROUND_INP_ID").value = "";
-}
+
 function clearGrayScale() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(GRAY_CANVAS_ID);
+  FOREGROUND_IMG = null;
   document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearRainbow() {
   clearCanvas(RAINBOW_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
+  FOREGROUND_IMG = null;
   document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
 function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
+  FOREGROUND_IMG = null;
   document.getElementById("FOREGROUND_INP_ID").value = "";
 }
 
