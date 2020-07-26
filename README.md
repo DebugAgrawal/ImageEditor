@@ -16,7 +16,7 @@
 ```
 ---
 ### Technologies Used:
-* Pure HTML+CSS
+* HTML+CSS
 * Basics of JavaScript
 ---
 #### *Key concepts*
