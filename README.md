@@ -2,7 +2,7 @@
 ### A Responsive Web Application where you can easily edit and download images, currently providing 5 features.
 * ##### Chroma Key effect.
 * ##### Gray Scale effect.
-* ##### Image Steganography.
+* ##### Image Steganography. (must try)
 * ##### Color Overlay.
 * ##### Rainbow Filter.
 ---
