@@ -1,5 +1,5 @@
 # [ImageEditor](https://debugagrawal.github.io/ImageEditor/) 
-### A small Web Application currently providing 5 features to edit your image.
+### A Responsive Web Application where you can easily edit and download images, currently providing 5 features.
 * ##### Chroma Key effect.
 * ##### Gray Scale effect.
 * ##### Image Steganography.
@@ -15,9 +15,10 @@
 4. Download the image.
 ```
 ---
-### Technologies Used:
-* HTML+CSS
-* Basics of JavaScript
+### Tech stack Used:
+* HTML
+* CSS
+* JavaScript
 ---
 #### *Key concepts*
 * ##### Chroma Key effect.
