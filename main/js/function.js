@@ -58,13 +58,14 @@ function checkImageSize() {
   }
 }
 
+// ...................................X.......................................................
+
+// ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
 function alert1()
 {
   alert("Make sure your image has greeen Background.");
 }
-// ...................................X.......................................................
 
-// ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
 function mergeGreenScreen() {
 
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
