@@ -6,29 +6,11 @@ var OVERLAY_IMG = null;
 var RAINBOW_IMG = null;
 var ENCRYPTED_IMG = null;
 var AVG_COLOR;
-var AUDIO_INDEX = new Audio('main/Audio/smack.mp3');
+var AUDIO_INDEX = new Audio('../Audio/smack.mp3');
 var AUDIO_OTHERS = new Audio('../Audio/cash.mp3');
 
 
 // ----------------------UPLOAD & RESIZING SECTION----------------------------------
-function upload1() {
-  var f = document.getElementById("FOREGROUND_INP_ID");
-  FOREGROUND_IMG = new SimpleImage(f);
-  FOREGROUND_IMG.drawTo(FIRST_CANVAS_ID);
-}
-function upload2() {
-  var b = document.getElementById("BACKGROUND_INP_ID");
-  BACKGROUND_IMG = new SimpleImage(b);
-  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
-}
-
-function changeSize() {
-  alert("Restoring Sizes \nEverything under control");
-  BACKGROUND_IMG.setSize(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
-  var secondCanvasContext = SECOND_CANVAS_ID.getContext("2d");
-  secondCanvasContext.clearRect(0, 0, FIRST_CANVAS_ID.width, FIRST_CANVAS_ID.height);
-  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
-}
 
 function isForeGroundImageUploaded() {
   if (FOREGROUND_IMG == null || !FOREGROUND_IMG.complete()) {
@@ -46,6 +28,18 @@ function isBackGroundImageUploaded() {
   return true;
 }
 
+function upload1() {
+  var f = document.getElementById("FOREGROUND_INP_ID");
+  FOREGROUND_IMG = new SimpleImage(f);
+  FOREGROUND_IMG.drawTo(FIRST_CANVAS_ID);
+}
+
+function upload2() {
+  var b = document.getElementById("BACKGROUND_INP_ID");
+  BACKGROUND_IMG = new SimpleImage(b);
+  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
+}
+
 function checkImageSize() {
   var wbg = BACKGROUND_IMG.getWidth();
   var wfg = FOREGROUND_IMG.getWidth();
@@ -58,11 +52,18 @@ function checkImageSize() {
   }
 }
 
+function changeSize() {
+  alert("Restoring Sizes \nEverything under control");
+  BACKGROUND_IMG.setSize(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
+  var secondCanvasContext = SECOND_CANVAS_ID.getContext("2d");
+  secondCanvasContext.clearRect(0, 0, FIRST_CANVAS_ID.width, FIRST_CANVAS_ID.height);
+  BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
+}
+
 // ...................................X.......................................................
 
 // ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
-function alert1()
-{
+function alert1() {
   alert("Make sure your image has greeen Background.");
 }
 
@@ -87,14 +88,26 @@ function mergeGreenScreen() {
     }
     COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
     AUDIO_OTHERS.play();
-    document.getElementById("green_btn").disabled = true; 
+    document.getElementById("green_btn").disabled = true;
   }
 }
 // ...................................X.......................................................
 
 // ---------------------------_STEGANOGRAPHY_CODE_-----------------------------------------
-function clearBits(value) {
-  return Math.floor(value / 16) * 16;
+function encrypt() {
+  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
+
+    checkImageSize();
+
+    FOREGROUND_IMG = chopImage1(FOREGROUND_IMG);
+    BACKGROUND_IMG = chopImage2(BACKGROUND_IMG);
+    ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
+
+    ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
+    AUDIO_OTHERS.play();
+    alert("!!! Congratulations, your  image has been successfully Encrypted!!!\n!!!Observe Carefully..!!!\nNow try decrypting your image");
+    document.getElementById("encrypt_btn").disabled = true;
+  }
 }
 
 function chopImage1(image) {
@@ -104,6 +117,10 @@ function chopImage1(image) {
     px.setBlue(clearBits(px.getBlue()));
   }
   return image;
+}
+
+function clearBits(value) {
+  return Math.floor(value / 16) * 16;
 }
 
 function chopImage2(image) {
@@ -120,6 +137,7 @@ function combineImages(image1, image2) {
   var ouput_image = new SimpleImage(image1.getWidth(), image1.getHeight());
 
   for (var px of ouput_image.values()) {
+    
     var x = px.getX();
     var y = px.getY();
 
@@ -134,25 +152,18 @@ function combineImages(image1, image2) {
   return ouput_image;
 }
 
-function encrypt() {
-
+function decrypt() {
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
-    checkImageSize();
-    
-    FOREGROUND_IMG = chopImage1(FOREGROUND_IMG);
-    BACKGROUND_IMG = chopImage2(BACKGROUND_IMG);
-    ENCRYPTED_IMG = combineImages(FOREGROUND_IMG, BACKGROUND_IMG);
-
-    ENCRYPTED_IMG.drawTo(ENCRYPT_CANVAS_ID);
-    AUDIO_OTHERS.play();
-    alert("!!! Congratulations, your  image has been successfully Encrypted!!!\n!!!Observe Carefully..!!!\nNow try decrypting your image");
-    document.getElementById("encrypt_btn").disabled = true; 
+    if (ENCRYPTED_IMG != null) {
+      var extractedImg = extractHiddenImage(ENCRYPTED_IMG);
+      extractedImg.drawTo(DECRYPT_CANVAS_ID);
+      AUDIO_OTHERS.play();
+      document.getElementById("decrypt_btn").disabled = true;
+    }
+    else {
+      alert("Please EnCrypt the Image before Decrypting");
+    }
   }
-}
-
-
-function extractBits(value) {
-  return (value % 16) * 16;
 }
 
 function extractHiddenImage(image) {
@@ -164,19 +175,8 @@ function extractHiddenImage(image) {
   return image;
 }
 
-function decrypt() {
-  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
-    if (ENCRYPTED_IMG != null) {
-      var extractedImg = extractHiddenImage(ENCRYPTED_IMG);
-      extractedImg.drawTo(DECRYPT_CANVAS_ID);
-      AUDIO_OTHERS.play();
-    document.getElementById("decrypt_btn").disabled = true; 
-    }
-    else {
-      alert("Please EnCrypt the Image before Decrypting");
-    }
-
-  }
+function extractBits(value) {
+  return (value % 16) * 16;
 }
 // ...................................X.......................................................
 
@@ -195,7 +195,7 @@ function makegray() {
     }
     GRAY_IMG.drawTo(GRAY_CANVAS_ID);
     AUDIO_OTHERS.play();
-    document.getElementById("gray_btn").disabled = true; 
+    document.getElementById("gray_btn").disabled = true;
   }
 }
 //...................................X.......................................................
@@ -377,12 +377,12 @@ function clearGreenScreen() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(SECOND_CANVAS_ID);
   clearCanvas(COMPOSITE_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value="" ;
-  document.getElementById("BACKGROUND_INP_ID").value="" ;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
   FOREGROUND_IMG = null;
   BACKGROUND_IMG = null;
   COMPOSITE_IMG = null;
-    document.getElementById("green_btn").disabled = false; 
+  document.getElementById("green_btn").disabled = false;
 }
 
 function clearStegenography() {
@@ -390,39 +390,39 @@ function clearStegenography() {
   clearCanvas(DECRYPT_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(ENCRYPT_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value="" ;
-  document.getElementById("BACKGROUND_INP_ID").value="" ;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
+  document.getElementById("BACKGROUND_INP_ID").value = "";
   FOREGROUND_IMG = null;
   BACKGROUND_IMG = null;
-  document.getElementById("encrypt_btn").disabled = false; 
-  document.getElementById("decrypt_btn").disabled = false; 
+  document.getElementById("encrypt_btn").disabled = false;
+  document.getElementById("decrypt_btn").disabled = false;
 }
 
 function clearGrayScale() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(GRAY_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
   FOREGROUND_IMG = null;
   GRAY_IMG = null;
-  document.getElementById("gray_btn").disabled = false; 
+  document.getElementById("gray_btn").disabled = false;
 }
 
 function clearRainbow() {
   clearCanvas(RAINBOW_CANVAS_ID);
   clearCanvas(FIRST_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
   RAINBOW_IMG = null;
   FOREGROUND_IMG = null;
-  document.getElementById("rainbow_btn").disabled = false; 
+  document.getElementById("rainbow_btn").disabled = false;
 }
 
 function clearOverlay() {
   clearCanvas(FIRST_CANVAS_ID);
   clearCanvas(OVERLAY_CANVAS_ID);
-  document.getElementById("FOREGROUND_INP_ID").value="" ;
+  document.getElementById("FOREGROUND_INP_ID").value = "";
   FOREGROUND_IMG = null;
   OVERLAY_IMG = null;
-  document.getElementById("overlay_btn").disabled = false; 
+  document.getElementById("overlay_btn").disabled = false;
 }
 function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
