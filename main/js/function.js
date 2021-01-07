@@ -62,37 +62,6 @@ function changeSize() {
 
 // ...................................X.......................................................
 
-// ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
-function alert1() {
-  alert("Make sure your image has greeen Background.");
-}
-
-function mergeGreenScreen() {
-
-  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
-    checkImageSize();
-    var c;
-    COMPOSITE_IMG = new SimpleImage(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
-    for (var pix of FOREGROUND_IMG.values()) {
-      var x = pix.getX();
-      var y = pix.getY();
-
-      if ((pix.getGreen() > 240) || (pix.getGreen() > (pix.getBlue() + pix.getRed()))) {
-        c = BACKGROUND_IMG.getPixel(x, y);
-        COMPOSITE_IMG.setPixel(x, y, c);
-      }
-      else {
-        COMPOSITE_IMG.setPixel(x, y, pix);
-      }
-
-    }
-    COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
-    AUDIO_OTHERS.play();
-    document.getElementById("green_btn").disabled = true;
-  }
-}
-// ...................................X.......................................................
-
 // ---------------------------_STEGANOGRAPHY_CODE_-----------------------------------------
 function encrypt() {
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
@@ -177,6 +146,38 @@ function extractHiddenImage(image) {
 
 function extractBits(value) {
   return (value % 16) * 16;
+}
+// ...................................X.......................................................
+
+// ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
+
+function alert1() {
+  alert("Make sure your image has greeen Background.");
+}
+
+function mergeGreenScreen() {
+
+  if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
+    checkImageSize();
+    var c;
+    COMPOSITE_IMG = new SimpleImage(FOREGROUND_IMG.getWidth(), FOREGROUND_IMG.getHeight());
+    for (var pix of FOREGROUND_IMG.values()) {
+      var x = pix.getX();
+      var y = pix.getY();
+
+      if ((pix.getGreen() > 240) || (pix.getGreen() > (pix.getBlue() + pix.getRed()))) {
+        c = BACKGROUND_IMG.getPixel(x, y);
+        COMPOSITE_IMG.setPixel(x, y, c);
+      }
+      else {
+        COMPOSITE_IMG.setPixel(x, y, pix);
+      }
+
+    }
+    COMPOSITE_IMG.drawTo(COMPOSITE_CANVAS_ID);
+    AUDIO_OTHERS.play();
+    document.getElementById("green_btn").disabled = true;
+  }
 }
 // ...................................X.......................................................
 
