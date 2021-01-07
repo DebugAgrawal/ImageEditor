@@ -25,7 +25,6 @@ SimplePixel = function (simple_image, x, y) {
 };
 
 SimplePixel.prototype = {
-    constructor: SimplePixel,
     getX: function () {
         __SimpleImageUtilities.funCheck('getX', 0, arguments.length);
         return this.x;
@@ -142,7 +141,6 @@ SimpleImage = function () {
 
 
 SimpleImage.prototype = {
-    constructor: SimpleImage,
     complete: function () {
         return this.imageData != null;
     },
@@ -268,6 +266,7 @@ SimpleImage.prototype = {
     __init: function (img) {
         try {
             this.id = img.id;
+            console.log(img.naturalWidth,img.width);
             // this is a hack to make three different cases work together:
             // - small empty image, thumbnail images, and canvases
             this.width = ('naturalWidth' in img) ? Math.max(img.naturalWidth, img.width) : img.width;
@@ -330,9 +329,11 @@ var __SimpleImageUtilities = (function () {
         makeHTMLCanvas: function (prefix) {
             var canvas = document.createElement('canvas');
             canvas.id = prefix + globalCanvasCount;
+            console.log( canvas.id);
             canvas.style.display = 'none';
             canvas.innerHTML = 'Your browser does not support HTML5.'
             globalCanvasCount++;
+            console.log("Canvas");
             return canvas;
         },
 
@@ -344,6 +345,7 @@ var __SimpleImageUtilities = (function () {
                 makeHTMLImage(this.result, file.name.substr(file.name.lastIndexOf('/') + 1), simpleImage);
             }
             reader.readAsDataURL(file);
+            console.log("INPUT");
             return null;
         },
 
