@@ -60,8 +60,6 @@ function changeSize() {
   BACKGROUND_IMG.drawTo(SECOND_CANVAS_ID);
 }
 
-// ...................................X.......................................................
-
 // ---------------------------_STEGANOGRAPHY_CODE_-----------------------------------------
 function encrypt() {
   if (isForeGroundImageUploaded() && isBackGroundImageUploaded()) {
@@ -147,7 +145,6 @@ function extractHiddenImage(image) {
 function extractBits(value) {
   return (value % 16) * 16;
 }
-// ...................................X.......................................................
 
 // ---------------------------_GreenScreen_Effect_CODE_-----------------------------------------
 
@@ -179,7 +176,6 @@ function mergeGreenScreen() {
     document.getElementById("green_btn").disabled = true;
   }
 }
-// ...................................X.......................................................
 
 //---------------------------_GRAYSCALE_CODE_-----------------------------------------
 function makegray() {
@@ -199,8 +195,6 @@ function makegray() {
     document.getElementById("gray_btn").disabled = true;
   }
 }
-//...................................X.......................................................
-
 
 //---------------------------_COLOR_OVERLAY_CODE_-----------------------------------------
 function doOverlay() {
@@ -228,8 +222,6 @@ function doOverlay() {
     document.getElementById("overlay_btn").disabled = true;
   }
 }
-//...................................X.......................................................
-
 
 //---------------------------_RAINBOW_EFFECT_CODE_-----------------------------------------
 function makeRainBow() {
@@ -369,9 +361,6 @@ function doRed() {
   pixel.setBlue(blue);
 }
 
-//...................................X.................................................
-
-
 //---------------------------_CLEAR_FUNCTIONS_-----------------------------------------
 
 function clearGreenScreen() {
@@ -429,8 +418,6 @@ function clearCanvas(canvas) {
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
-//...................................X.......................................................
-
 
 //---------------------------AUDIO_CODE_-----------------------------------------
 function soundIndex() {
